@@ -11,6 +11,7 @@ public class ReviewExcersise83 {
         {
         // Generate random number for each value
         }
+	System.out.println("test");
 	}
 
 }
