@@ -12,6 +12,7 @@ public class printtest {
 		/*  int[][] array2d = new int [4][2]; row followed by column                 */
 
 	    // THIS IS A CHANGE!!!
+	    // THIS IS A CHANGE PART 2!
 	}
 
 }
