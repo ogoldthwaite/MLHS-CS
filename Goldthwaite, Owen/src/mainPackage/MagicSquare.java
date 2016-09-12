@@ -19,15 +19,20 @@ private int[][] square;
 		    square[row][col]=1;
 		  for(int k=2; k<=n*n; k++)
 		  {
-			if(square[row+1][col+1]==0)
+			if(square[row+1][col+1]==0 && (row<=square.length && col<=square[0].length))
 			{
-				row=row+1;                   //Ask Mr. Horn!
+			    if(row==square.length-1)
+			    	row=0;
+			    if(col==square[0].length-1)
+			    	col=0;
+				row=row+1;                   
 				col=col+1;
 			} 
 			else
 			 row = row-1;
 			
 		  square[row][col] = newval;
+		  newval++;
 		  }
 
 		}
