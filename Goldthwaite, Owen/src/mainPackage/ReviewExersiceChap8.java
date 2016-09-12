@@ -2,14 +2,14 @@ package mainPackage;
 import java.util.*;
 public class ReviewExersiceChap8 {
 
-	public static void main(String[] args)       // REVIEW 8.10 HELP?
+	public static void main(String[] args)       // Non-Code review questions in comments at bottom of this page
 	{
    Purse purseOne = new Purse(); Purse purseTwo = new Purse();
    Square squareOne = new Square();
    MagicSquare magicSquareOne = new MagicSquare(3);
    Scanner scan = new Scanner(System.in);
 		System.out.println("1 for Review 8.3, 2 for Review 8.4, 3 for Program 8.2, 4 for Program 8.3");
-		System.out.print("5 for Program 8.4, 6 for Program 8.5, 7 for Program 8.6: ");
+		System.out.print("5 for Program 8.4, 6 for Program 8.5, 7 for Program 8.6, 8 for Program 8.18, 9 for Program 8.19:  ");
 	    int foo=scan.nextInt();
 		if (foo==1) maxMin();	
 	    if (foo==2) stringLoop();

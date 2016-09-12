@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Square 
 {
-private int n=3; //Square size
+private int n=3; //Square size; Only works for n = 3 currently
 private int[][] square = new int[n][n];
 
    public Square()
@@ -13,13 +13,16 @@ private int[][] square = new int[n][n];
    }
    public void add()
    {
+	  System.out.println("Enter a "+n+" by "+n+" square!");
 	  Scanner scan = new Scanner(System.in);
 	   for(int m=0; m<square.length; m++)
+	   {
 		for(int k=0; k<square[0].length;k++)
 		{
 			square[m][k]=scan.nextInt();
 		} 
-       
+   System.out.println(" ");
+	 }
    }
    public boolean isMagic()
    {
