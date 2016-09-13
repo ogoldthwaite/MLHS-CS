@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Purse 
 {
-  private ArrayList<String> coins = new ArrayList <String>();
+  private ArrayList<String> coins;
 
 	public Purse()
 	{
-		
+		coins = new ArrayList <String>();
 	}
 	public ArrayList<String> getCoins()
 	{
@@ -38,10 +38,10 @@ public class Purse
 	}
 	public String toString()
 	{
-		String coinnames ="Purse-";
+		String coinnames ="Purse- ";
 		for(int h=0; h<=coins.size()-1; h++)
 	     {
-	    	coinnames = coinnames + coins.get(h) + ", ";
+	    	coinnames = coinnames + coins.get(h) + "  ";
 	     }
 		return coinnames;
 	}
