@@ -1,4 +1,4 @@
-package mainPackage;
+package chapter8excersises;
 import java.util.*;
 public class ReviewExersiceChap8 {
 

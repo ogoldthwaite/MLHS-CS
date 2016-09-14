@@ -1,4 +1,4 @@
-package mainPackage;
+package chapter8excersises;
 
 public class MagicSquare 
 {
