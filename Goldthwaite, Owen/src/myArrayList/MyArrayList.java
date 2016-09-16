@@ -16,60 +16,63 @@ public class MyArrayList<E>
 
 	public MyArrayList(int initialCapacity)
 	{
-		if (initialCapacity <= 0) // Replace this with the correct condition
+		if (initialCapacity < 0) // Replace this with the correct condition
 			throw new IllegalArgumentException();
 		a = new Object[initialCapacity];
+		size = 0;
 	}
 
 	public int size()
 	{
-		int count = 0;
-		for(Object x : a)
-		{
-			count++;
-		}
-		
-		return count;
+		return size;	
 	}
 
     public E get(int index)
 	{
-		if (true)
+		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
-
+        return (E) a[index];
 		// Note: You must cast the reference from the array to type E.
 		// For example, to return element 6 from a: return (E) a[6];
-		
-		return null;
 	}
 
 	public E set(int index, E element)
-	{
-		if (true)
+	{	
+		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
 		
-		return null;
+		Object temp = a[index];
+		a[index]=element;
+		
+		return (E) temp;
 	}
 
 	public boolean contains(Object elem)
 	{
+		for(int i = 0; i<a.length;i++)
+		{
+			if (a[i].equals(elem))
+				return true;
+		}
 		return false;
 	}
 
 	public void trimToSize()
 	{
-
+		//DO STUFF HERE
 	}
 
 	public void add(E elem)
 	{
-
+		//Object[] temparray = new Object[a.length];
 	}
 
 	public void add(int index, E element)
 	{
-		if (true)
+		if (index < 0 || index >= size)
 			throw new IndexOutOfBoundsException();
+		Object[] temparray = new Object[a.length];
+		
 	}
 
 	public E remove(int index)
