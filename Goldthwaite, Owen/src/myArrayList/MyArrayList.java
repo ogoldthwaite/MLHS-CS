@@ -59,28 +59,55 @@ public class MyArrayList<E>
 
 	public void trimToSize()
 	{
-		//DO STUFF HERE
+		if(size < a.length)
+		{
+			Object[] temparray = new Object[size];
+			for(int i = 0; i < temparray.length; i++)
+				temparray[i]=a[i];
+		a=temparray;
+		}
+		
 	}
 
 	public void add(E elem)
 	{
-		//Object[] temparray = new Object[a.length];
+		add(a.length-1, elem);
 	}
 
 	public void add(int index, E element)
 	{
-		if (index < 0 || index >= size)
+		if (index < 0 || index >= a.length)
 			throw new IndexOutOfBoundsException();
-		Object[] temparray = new Object[a.length];
+		if (size == a.length)
+		{
+			Object[] temparray = new Object[a.length*2];
+			for(int i = 0; i < a.length; i++)
+				temparray[i]=a[i];
+			a=temparray;
+		}
+		for (int i = size; i > index; i--)
+		{
+			a[i] = a[i-1];
+		}
+		a[index] = element;
+		size++;
 		
 	}
 
 	public E remove(int index)
 	{
-		if (true)
+		if (index < 0 || index >= a.length)
 			throw new IndexOutOfBoundsException();
+		Object temp;
+		for (int i = index; i <= size-1; i++)
+		{
+			a[i]= a[i+1];
+		}
+		temp = a[size-1];
+		a[size - 1] = null;
+		size--;
 		
-		return null;
+		return (E) temp;
 	}
 
 	public boolean remove(Object elem)
