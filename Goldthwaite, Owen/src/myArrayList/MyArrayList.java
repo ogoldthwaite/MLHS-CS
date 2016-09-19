@@ -112,7 +112,16 @@ public class MyArrayList<E>
 
 	public boolean remove(Object elem)
 	{
+		for(int i = 0; i<a.length; i++)
+		{
+			if(a[i].equals(elem))
+			{
+				remove(i);
+				return true;
+			}
+		}
 		return false;
+			
 	}
 	
 	// start package access methods to facilitate automated testing
