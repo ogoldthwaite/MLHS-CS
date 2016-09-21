@@ -1,6 +1,7 @@
 package myArrayList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MyArrayList<E>
 {
@@ -51,7 +52,7 @@ public class MyArrayList<E>
 	{
 		for(int i = 0; i<a.length;i++)
 		{
-			if (a[i].equals(elem))
+			if (a[i].equals(elem) && !(elem.equals(null)))
 				return true;
 		}
 		return false;
@@ -71,29 +72,30 @@ public class MyArrayList<E>
 
 	public void add(E elem)
 	{
-		add(a.length-1, elem);
+		//add(a.length-1, elem);
 	}
 
 	public void add(int index, E element)
 	{
-		if (index < 0 || index >= a.length)
+		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException();
 		if (size == a.length)
 		{
 			Object[] temparray = new Object[a.length*2];
-			for(int i = 0; i < a.length; i++)
+			for(int i = 0; i <a.length; i++)
 				temparray[i]=a[i];
-			a=temparray;
-		}
+			 a=temparray; 
+ 		}
 		for (int i = size; i > index; i--)
 		{
 			a[i] = a[i-1];
 		}
 		a[index] = element;
 		size++;
+		System.out.println("This line ran!");
 		
 	}
-
+	
 	public E remove(int index)
 	{
 		if (index < 0 || index >= a.length)

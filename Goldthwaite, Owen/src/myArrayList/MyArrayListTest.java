@@ -7,7 +7,7 @@ public class MyArrayListTest
 {
 	public static void main(String[] args)
 	{
-		testRandom(10000, false);
+		testRandom(10000, true);
 	}
 
 	/**
