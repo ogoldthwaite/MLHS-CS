@@ -50,7 +50,7 @@ public class MyArrayList<E>
 
 	public boolean contains(Object elem)
 	{
-		for(int i = 0; i<a.length;i++)
+		for(int i = 0; i<size;i++)
 		{
 			if (a[i].equals(elem) && !(elem.equals(null)))
 				return true;
@@ -72,13 +72,18 @@ public class MyArrayList<E>
 
 	public void add(E elem)
 	{
-		//add(a.length-1, elem);
+		add(size, elem);
 	}
 
 	public void add(int index, E element)
 	{
 		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException();
+		if (a.length==0)
+		{
+			Object[] temparray = new Object[1];
+			a=temparray;
+		}
 		if (size == a.length)
 		{
 			Object[] temparray = new Object[a.length*2];
@@ -86,13 +91,14 @@ public class MyArrayList<E>
 				temparray[i]=a[i];
 			 a=temparray; 
  		}
+		
 		for (int i = size; i > index; i--)
-		{
+		{			
 			a[i] = a[i-1];
 		}
 		a[index] = element;
 		size++;
-		System.out.println("This line ran!");
+		
 		
 	}
 	
@@ -116,7 +122,7 @@ public class MyArrayList<E>
 	{
 		for(int i = 0; i<a.length; i++)
 		{
-			if(a[i].equals(elem))
+			if(a[i].equals(elem) && !(a[i].equals(null)))
 			{
 				remove(i);
 				return true;
