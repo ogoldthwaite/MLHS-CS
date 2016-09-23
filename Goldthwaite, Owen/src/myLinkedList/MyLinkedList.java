@@ -5,19 +5,23 @@ import java.util.*;
 public class MyLinkedList<E>
 {    
 	private int size;
-	ListNode head;
-	ListNode tail;
+	private ListNode<E> head;
+	private ListNode<E> tail;
 	
     public MyLinkedList()
     {
-    	head = new ListNode(null);
-		tail = new ListNode(null);
-
+    	head = new ListNode<E>(null);
+		tail = new ListNode<E>(null, head, null);
+        head.next=tail;
     }
     
     public boolean add(E o)
     {
-        
+       ListNode<E> coolNode = new ListNode<E>(o);
+       tail.prev.next=coolNode;
+       coolNode.next=tail;
+       tail.prev=coolNode;
+      return true;
     }
     
     public void add(int index, E element)
