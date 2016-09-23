@@ -128,7 +128,7 @@ public class MyArrayList<E>
 	
 	// start package access methods to facilitate automated testing
 	// do not modify these methods
-	
+	// this is the letter A
 	Object[] getA()
 	{
 		return a;
