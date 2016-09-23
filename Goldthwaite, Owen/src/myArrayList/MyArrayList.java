@@ -17,7 +17,7 @@ public class MyArrayList<E>
 
 	public MyArrayList(int initialCapacity)
 	{
-		if (initialCapacity < 0) // Replace this with the correct condition
+		if (initialCapacity < 0)
 			throw new IllegalArgumentException();
 		a = new Object[initialCapacity];
 		size = 0;
@@ -50,7 +50,7 @@ public class MyArrayList<E>
 
 	public boolean contains(Object elem)
 	{
-		for(int i = 0; i<size;i++)
+		for(int i = 0; i< size;i++)
 		{
 			if (a[i].equals(elem) && !(elem.equals(null)))
 				return true;
@@ -79,19 +79,13 @@ public class MyArrayList<E>
 	{
 		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException();
-		if (a.length==0)
-		{
-			Object[] temparray = new Object[1];
-			a=temparray;
-		}
 		if (size == a.length)
 		{
-			Object[] temparray = new Object[a.length*2];
+			Object[] temparray = new Object[a.length*2+1];
 			for(int i = 0; i <a.length; i++)
 				temparray[i]=a[i];
 			 a=temparray; 
  		}
-		
 		for (int i = size; i > index; i--)
 		{			
 			a[i] = a[i-1];
@@ -104,7 +98,7 @@ public class MyArrayList<E>
 	
 	public E remove(int index)
 	{
-		if (index < 0 || index >= a.length)
+		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException();
 		Object temp;
 		for (int i = index; i <= size-1; i++)
