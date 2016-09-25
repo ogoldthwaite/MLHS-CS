@@ -21,7 +21,8 @@ public class MyLinkedList<E>
        tail.prev.next=coolNode;
        coolNode.next=tail;
        tail.prev=coolNode;
-      return true;
+       size++;
+       return true;
     }
     
     public void add(int index, E element)
@@ -66,7 +67,12 @@ public class MyLinkedList<E>
     
     public E get(int index)
     {
-        
+        if(index < 0 || index >= size)
+        	throw new IndexOutOfBoundsException();
+        ListNode<E> tempNode = head.next;
+        for(int i = 0; i <= index; i++)
+        	tempNode=tempNode.next;
+        return (E)tempNode;
     }
     
     public boolean isEmpty()
