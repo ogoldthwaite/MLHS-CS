@@ -27,7 +27,16 @@ public class MyLinkedList<E>
     
     public void add(int index, E element)
     {
-        
+    	if(index < 0 || index > size)
+        	throw new IndexOutOfBoundsException();
+    	ListNode<E> addNode = new ListNode<E>(element);
+    	ListNode<E> tempNode;
+    	tempNode = head;
+    	for (int i = size; i > index; i--)
+		{			
+			
+		}
+    	
     }
     
     public void addFirst(E o)
@@ -42,12 +51,12 @@ public class MyLinkedList<E>
     
     public E getFirst()
     {
-        
+        return (E) head.next;
     }
     
     public E getLast()
     {
-        
+    	return (E) tail.prev;
     }
     
     public E removeFirst()
@@ -97,7 +106,7 @@ public class MyLinkedList<E>
     
     public int size()
     {
-        
+        return size;
     }
     
     public String toString()
