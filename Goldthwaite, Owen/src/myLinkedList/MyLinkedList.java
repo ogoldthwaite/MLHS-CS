@@ -30,23 +30,39 @@ public class MyLinkedList<E>
     	if(index < 0 || index > size)
         	throw new IndexOutOfBoundsException();
     	ListNode<E> addNode = new ListNode<E>(element);
-    	ListNode<E> tempNode;
-    	tempNode = head;
-    	for (int i = size; i > index; i--)
-		{			
 			
-		}
+		addNode.prev = getNode(index - 1);
+		addNode.next = getNode(index + 1);
+		addNode.prev.next = addNode;
+		addNode.next.prev = addNode;
+	size++;
     	
+    }
+     
+    private ListNode<E> getNode(int index)
+    {
+    	 ListNode<E> tempNode = head.next;
+         for(int i = 0; i < index; i++)
+         	tempNode=tempNode.next;
+    	return tempNode;
     }
     
     public void addFirst(E o)
     {
-        
+    	ListNode<E> coolNode = new ListNode<E>(o);
+    	coolNode.next = head.next.next;
+    	head.next.next.prev = coolNode;
+    	head.next = coolNode;
+    	coolNode.prev = head;
     }
     
     public void addLast(E o)
     {
-        
+    	ListNode<E> coolNode = new ListNode<E>(o);
+        tail.prev.next=coolNode;
+        coolNode.next=tail;
+        tail.prev=coolNode;
+        size++;
     }
     
     public E getFirst()
@@ -66,7 +82,7 @@ public class MyLinkedList<E>
     
     public E removeLast()
     {
-        
+    	
     }
     
     public void clear()
@@ -78,10 +94,12 @@ public class MyLinkedList<E>
     {
         if(index < 0 || index >= size)
         	throw new IndexOutOfBoundsException();
+        
         ListNode<E> tempNode = head.next;
-        for(int i = 0; i <= index; i++)
+        for(int i = 0; i < index; i++)
         	tempNode=tempNode.next;
-        return (E)tempNode;
+        
+        return tempNode.value;
     }
     
     public boolean isEmpty()
@@ -109,9 +127,19 @@ public class MyLinkedList<E>
         return size;
     }
     
+    //public void insert(int index, MyLinkedList<E> listInsert)
+    {
+    	
+    }
+    
     public String toString()
     {
-        
+        String printString = " ";
+    	for(int i = 0; i <= size; i++)
+        {
+           printString = head.next.value + " ";
+        }
+    	return printString;
     }
     
     private class ListNode<E>
