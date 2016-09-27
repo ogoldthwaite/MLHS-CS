@@ -17,12 +17,14 @@ public class MyLinkedList<E>
     
     public boolean add(E o)
     {
-       ListNode<E> coolNode = new ListNode<E>(o);
+     /* ListNode<E> coolNode = new ListNode<E>(o);
        tail.prev.next=coolNode;
        coolNode.next=tail;
        tail.prev=coolNode;
        size++;
-       return true;
+       return true; */
+    	add(size, o);
+    	return true;
     }
     
     public void add(int index, E element)
@@ -30,39 +32,37 @@ public class MyLinkedList<E>
     	if(index < 0 || index > size)
         	throw new IndexOutOfBoundsException();
     	ListNode<E> addNode = new ListNode<E>(element);
-			
+    	
+    	getNode(index).next = null;
+		getNode(index).prev = null;
 		addNode.prev = getNode(index - 1);
 		addNode.next = getNode(index + 1);
-		addNode.prev.next = addNode;
-		addNode.next.prev = addNode;
+		getNode(index + 1).prev = addNode;
+		getNode(index - 1).next = addNode;
 	size++;
     	
     }
      
     private ListNode<E> getNode(int index)
     {
-    	 ListNode<E> tempNode = head.next;
+    	 if(index > size) 
+    		 return tail;
+    	 if(index < 0)
+    		 return head;
+    	 ListNode<E> tempNode = head;
          for(int i = 0; i < index; i++)
-         	tempNode=tempNode.next;
+         	tempNode=tempNode.next;	 
     	return tempNode;
     }
     
     public void addFirst(E o)
     {
-    	ListNode<E> coolNode = new ListNode<E>(o);
-    	coolNode.next = head.next.next;
-    	head.next.next.prev = coolNode;
-    	head.next = coolNode;
-    	coolNode.prev = head;
+    	add(0, o);
     }
     
     public void addLast(E o)
     {
-    	ListNode<E> coolNode = new ListNode<E>(o);
-        tail.prev.next=coolNode;
-        coolNode.next=tail;
-        tail.prev=coolNode;
-        size++;
+    	add(size, o);
     }
     
     public E getFirst()
@@ -77,12 +77,16 @@ public class MyLinkedList<E>
     
     public E removeFirst()
     {
-        
+    	ListNode<E> tempNode = head.next;
+    	remove(0);
+    	return tempNode.value;
     }
     
     public E removeLast()
     {
-    	
+    	ListNode<E> tempNode = tail.prev;
+    	remove(size-1);
+    	return tempNode.value;
     }
     
     public void clear()
@@ -109,17 +113,39 @@ public class MyLinkedList<E>
     
     public E remove()
     {
-        
+    	ListNode<E> tempNode = head.next;
+    	remove(0);
+    	return tempNode.value;
     }
     
     public E remove(int index)
     {
-        
+    	if(index < 0 || index >= size)
+        	throw new IndexOutOfBoundsException();
+    	ListNode<E> tempNode = getNode(index);
+    	
+    	getNode(index - 1).next = getNode(index + 1);
+    	getNode(index + 1).prev = getNode(index - 1);
+    	getNode(index).next = null;
+    	getNode(index).prev = null;
+    	
+    	return tempNode.value;
     }
     
     public E set(int index, E element)
     {
-        
+    	if(index < 0 || index >= size)
+        	throw new IndexOutOfBoundsException();
+    	ListNode<E> setNode = new ListNode<E>(element);
+    	ListNode<E> beingSet =getNode(index);
+    	ListNode<E> tempNode;
+    	
+    	tempNode = getNode(index);
+    	setNode.next = getNode(index + 1);
+    	setNode.prev = getNode(index - 1);
+    	beingSet = setNode;
+    	return tempNode.value;
+    	
     }
     
     public int size()
