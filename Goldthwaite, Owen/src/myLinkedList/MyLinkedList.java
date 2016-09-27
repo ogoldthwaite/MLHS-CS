@@ -33,12 +33,10 @@ public class MyLinkedList<E>
         	throw new IndexOutOfBoundsException();
     	ListNode<E> addNode = new ListNode<E>(element);
     	
-    	getNode(index).next = null;
-		getNode(index).prev = null;
 		addNode.prev = getNode(index - 1);
-		addNode.next = getNode(index + 1);
-		getNode(index + 1).prev = addNode;
-		getNode(index - 1).next = addNode;
+		addNode.next = getNode(index + 1); //Make nodes point to the next node and back
+		getNode(index + 1).prev = addNode; //Currently only addNode pointers are changing
+		getNode(index - 1).next = addNode; //Probs need loop
 	size++;
     	
     }
@@ -77,6 +75,8 @@ public class MyLinkedList<E>
     
     public E removeFirst()
     {
+    	if(size == 0)
+    		throw new NoSuchElementException();
     	ListNode<E> tempNode = head.next;
     	remove(0);
     	return tempNode.value;
@@ -84,6 +84,8 @@ public class MyLinkedList<E>
     
     public E removeLast()
     {
+    	if(size == 0)
+    		throw new NoSuchElementException();
     	ListNode<E> tempNode = tail.prev;
     	remove(size-1);
     	return tempNode.value;
@@ -91,7 +93,8 @@ public class MyLinkedList<E>
     
     public void clear()
     {
-        
+        head.next = tail;
+        tail.prev = head;
     }
     
     public E get(int index)
@@ -108,11 +111,16 @@ public class MyLinkedList<E>
     
     public boolean isEmpty()
     {
-        
+        if(size == 0)
+        	return true;
+        else 
+        	return false;
     }
     
     public E remove()
     {
+    	if(size == 0)
+    		throw new NoSuchElementException();
     	ListNode<E> tempNode = head.next;
     	remove(0);
     	return tempNode.value;
@@ -128,7 +136,7 @@ public class MyLinkedList<E>
     	getNode(index + 1).prev = getNode(index - 1);
     	getNode(index).next = null;
     	getNode(index).prev = null;
-    	
+    	size--;
     	return tempNode.value;
     }
     
@@ -161,11 +169,11 @@ public class MyLinkedList<E>
     public String toString()
     {
         String printString = " ";
-    	for(int i = 0; i <= size; i++)
+    	for(int i = 0; i < size; i++)
         {
            printString = head.next.value + " ";
         }
-    	return printString;
+    	return printString; 
     }
     
     private class ListNode<E>
