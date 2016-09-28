@@ -25,10 +25,10 @@ public class MyLinkedList<E>
     {
     	if(index < 0 || index > size)
         	throw new IndexOutOfBoundsException();
-    	
-    	ListNode<E> addNode = new ListNode<E>(element, getNode(index-1), getNode(index+1));
-    	getNode(index + 1).prev = addNode;
+    	ListNode<E> addNode = new ListNode<E>(element, getNode(index-1), getNode(index));
+    	getNode(index).prev = addNode;
     	getNode(index - 1).next = addNode;
+    	
 		
 	size++;
     	
@@ -36,12 +36,12 @@ public class MyLinkedList<E>
      
     private ListNode<E> getNode(int index)
     {
-    	 if(index > size) 
+    	 if(index >= size) 
     		 return tail;
     	 if(index < 0)
     		 return head;
     	 ListNode<E> tempNode = head;
-         for(int i = 0; i < index; i++)
+         for(int i = 0; i <= index; i++)
          	tempNode=tempNode.next;	 
     	return tempNode;
     }
@@ -96,10 +96,6 @@ public class MyLinkedList<E>
         if(index < 0 || index >= size)
         	throw new IndexOutOfBoundsException();
         
-     //   ListNode<E> tempNode = head.next;
-     // for(int i = 0; i < index; i++)
-     //	tempNode=tempNode.next;
-        
         return getNode(index).value;
     }
     
@@ -123,6 +119,7 @@ public class MyLinkedList<E>
     {
     	if(index < 0 || index >= size)
         	throw new IndexOutOfBoundsException();
+    	
     	ListNode<E> tempNode = getNode(index);
     	
     	getNode(index - 1).next = getNode(index + 1);
@@ -159,11 +156,15 @@ public class MyLinkedList<E>
     
     public String toString()
     {
-        String printString = " ";
+        String printString = "[";
     	for(int i = 0; i < size; i++)
         {
-           printString = head.next.value + " ";
+           printString += getNode(i).value;
+           if(i < size-1)
+        	   printString +=", ";
         }
+    	printString += "]";
+    	System.out.println(printString); //to test printing
     	return printString; 
     }
     
