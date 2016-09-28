@@ -17,12 +17,6 @@ public class MyLinkedList<E>
     
     public boolean add(E o)
     {
-     /* ListNode<E> coolNode = new ListNode<E>(o);
-       tail.prev.next=coolNode;
-       coolNode.next=tail;
-       tail.prev=coolNode;
-       size++;
-       return true; */
     	add(size, o);
     	return true;
     }
@@ -31,12 +25,11 @@ public class MyLinkedList<E>
     {
     	if(index < 0 || index > size)
         	throw new IndexOutOfBoundsException();
-    	ListNode<E> addNode = new ListNode<E>(element);
     	
-		addNode.prev = getNode(index - 1);
-		addNode.next = getNode(index + 1); //Make nodes point to the next node and back
-		getNode(index + 1).prev = addNode; //Currently only addNode pointers are changing
-		getNode(index - 1).next = addNode; //Probs need loop
+    	ListNode<E> addNode = new ListNode<E>(element, getNode(index-1), getNode(index+1));
+    	getNode(index + 1).prev = addNode;
+    	getNode(index - 1).next = addNode;
+		
 	size++;
     	
     }
@@ -95,6 +88,7 @@ public class MyLinkedList<E>
     {
         head.next = tail;
         tail.prev = head;
+        size=0;
     }
     
     public E get(int index)
@@ -102,11 +96,11 @@ public class MyLinkedList<E>
         if(index < 0 || index >= size)
         	throw new IndexOutOfBoundsException();
         
-        ListNode<E> tempNode = head.next;
-        for(int i = 0; i < index; i++)
-        	tempNode=tempNode.next;
+     //   ListNode<E> tempNode = head.next;
+     // for(int i = 0; i < index; i++)
+     //	tempNode=tempNode.next;
         
-        return tempNode.value;
+        return getNode(index).value;
     }
     
     public boolean isEmpty()
@@ -121,9 +115,8 @@ public class MyLinkedList<E>
     {
     	if(size == 0)
     		throw new NoSuchElementException();
-    	ListNode<E> tempNode = head.next;
-    	remove(0);
-    	return tempNode.value;
+    	
+    	return remove(0);
     }
     
     public E remove(int index)
@@ -134,8 +127,6 @@ public class MyLinkedList<E>
     	
     	getNode(index - 1).next = getNode(index + 1);
     	getNode(index + 1).prev = getNode(index - 1);
-    	getNode(index).next = null;
-    	getNode(index).prev = null;
     	size--;
     	return tempNode.value;
     }
