@@ -4,7 +4,7 @@ public class LinkedList<E>
 {
     // does not use a dummy head node
 	private ListNode head;
-	
+
 	public LinkedList()
 	{
 	    head = null;
@@ -16,7 +16,7 @@ public class LinkedList<E>
 	 */
 	public void add(E value)
 	{
-	    
+	    add(value, head);
 	}
 	
 	/**
@@ -27,8 +27,18 @@ public class LinkedList<E>
 	 */
 	private ListNode add(E value, ListNode start)
 	{
-	    
+	    if(start == null)
+	    {
+	    	ListNode addNode = new ListNode(value);
+	    	return addNode;
+	    }
+	    else
+	    {
+	    	start.next = add(value, start.next);
+	    return null;
+	    }
 		
+	    
 	}
 	
 	/**
@@ -68,18 +78,28 @@ public class LinkedList<E>
         String returnString = "[";
 		returnString = returnString + toString(head);
         
-		return returnString;
+		return returnString +"]";
     }
     
     private String toString(ListNode start)
     {
+    	String coolString =""; //reset with every call, change somehow?
     	if(start == null)
 		{
-			
+    		System.out.println(coolString);
+    		return coolString;
 		}
-    	
-    	return null;
-    	//[(value), (value), (value)]
+    	else 
+    	{
+    		if(start != head)
+    		coolString += ", ";
+    		
+    		coolString += start.value;
+    	toString(start.next);
+    	}
+
+    	return "";
+    	// [(value), (value), (value)]
     }
 	
 	private class ListNode
