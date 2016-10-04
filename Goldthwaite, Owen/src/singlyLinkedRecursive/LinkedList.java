@@ -29,18 +29,14 @@ public class LinkedList<E>
 	{
 		if(start == null)
 	    {
-			return null; //originally head, does = null?
-//			head.next = addNode;
-//			return addNode;
+			System.out.println("ran!");
+			ListNode addNode = new ListNode(value);
+			start = addNode;
 	    }
-		ListNode addNode = new ListNode(value);
-	    if(start.next == null)
-	    {
-	    	start.next = addNode;
-	    	return addNode;
-	    }
-	
-	    	return add(value, start.next);
+		else 
+	    	start.next = add(value, start.next);
+
+		return start;
 	}
 	
 	/**
@@ -77,23 +73,36 @@ public class LinkedList<E>
 	
 	public String toString()
     {
-        return "[" + toString(head) + "]";
+        
+		return "[" + toString(head) + "]";
     }
     
     private String toString(ListNode start)
     {
-    
+
     	if(start == null)
-    		return  "";
+    		return "";
     	
     	if(start.next == null)
-    		return "" + start.value;
-    	
-
+    	{
+    		System.out.println("ran");
+    		return (String) start.value;
+    	}
+    		else
     	return start.value +", " + toString(start.next);
 
     	//return "";
     	// [(value), (value), (value)]
+    }
+    
+    public void print (ListNode l)
+    {
+      if (l == null)
+        return;
+      else {
+        System.out.println(l.value);
+        print(l.next);
+      };
     }
 	
 	private class ListNode

@@ -19,16 +19,23 @@ public class LinkedListTest extends TestCase
         
         oracleAsString = oracle.toString();
         underTestAsString = underTest.toString();
-         
+        
+       
+        System.out.println(oracleAsString);
+        System.out.println(underTestAsString);
+        
+        assertTrue(oracleAsString.equals(underTestAsString));
+       
         oracle.add(10);
         underTest.add(10);
         
         oracle.add(7);
         underTest.add(7);
+ 
         
         oracleAsString = oracle.toString();
         underTestAsString = underTest.toString();
-        
+      
         assertTrue(oracleAsString.equals(underTestAsString));
     }
 }
