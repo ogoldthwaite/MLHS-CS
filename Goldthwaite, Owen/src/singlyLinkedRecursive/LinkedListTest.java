@@ -20,8 +20,7 @@ public class LinkedListTest extends TestCase
         oracleAsString = oracle.toString();
         underTestAsString = underTest.toString();
         
-        assertTrue(oracleAsString.equals(underTestAsString));
-        
+         
         oracle.add(10);
         underTest.add(10);
         

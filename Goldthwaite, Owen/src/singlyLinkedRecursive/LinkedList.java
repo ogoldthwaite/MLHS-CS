@@ -77,28 +77,26 @@ public class LinkedList<E>
     {
         String returnString = "[";
 		returnString = returnString + toString(head);
-        
+        System.out.println(returnString);
 		return returnString +"]";
+   
     }
     
     private String toString(ListNode start)
     {
-    	String coolString =""; //reset with every call, change somehow?
+    
     	if(start == null)
 		{
-    		System.out.println(coolString);
-    		return coolString;
+    		System.out.println("ran");
+    		return  "";
 		}
     	else 
-    	{
-    		if(start != head)
-    		coolString += ", ";
-    		
-    		coolString += start.value;
-    	toString(start.next);
-    	}
+    		if(start.next == null)
+    			return " " + start.value;
+    			
+    	return start.value + toString(start.next);
 
-    	return "";
+    	//return "";
     	// [(value), (value), (value)]
     }
 	
