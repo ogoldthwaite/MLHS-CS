@@ -19,7 +19,6 @@ public class LinkedListTest extends TestCase
         
         oracleAsString = oracle.toString();
         underTestAsString = underTest.toString();
-        
          
         oracle.add(10);
         underTest.add(10);

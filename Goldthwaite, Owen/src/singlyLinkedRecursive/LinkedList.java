@@ -27,18 +27,20 @@ public class LinkedList<E>
 	 */
 	private ListNode add(E value, ListNode start)
 	{
-	    if(start == null)
+		if(start == null)
 	    {
-	    	ListNode addNode = new ListNode(value);
+			return null; //originally head, does = null?
+//			head.next = addNode;
+//			return addNode;
+	    }
+		ListNode addNode = new ListNode(value);
+	    if(start.next == null)
+	    {
+	    	start.next = addNode;
 	    	return addNode;
 	    }
-	    else
-	    {
-	    	start.next = add(value, start.next);
-	    return null;
-	    }
-		
-	    
+	
+	    	return add(value, start.next);
 	}
 	
 	/**
@@ -75,26 +77,20 @@ public class LinkedList<E>
 	
 	public String toString()
     {
-        String returnString = "[";
-		returnString = returnString + toString(head);
-        System.out.println(returnString);
-		return returnString +"]";
-   
+        return "[" + toString(head) + "]";
     }
     
     private String toString(ListNode start)
     {
     
     	if(start == null)
-		{
-    		System.out.println("ran");
     		return  "";
-		}
-    	else 
-    		if(start.next == null)
-    			return " " + start.value;
-    			
-    	return start.value + toString(start.next);
+    	
+    	if(start.next == null)
+    		return "" + start.value;
+    	
+
+    	return start.value +", " + toString(start.next);
 
     	//return "";
     	// [(value), (value), (value)]
