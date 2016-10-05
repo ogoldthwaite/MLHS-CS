@@ -46,10 +46,10 @@ public class LinkedList<E>
 	 * Has no effect if the specified value is not in this list.
 	 * @param value the value to be removed.
 	 */
-//	public void remove(E value)
-//	{
-//	    head = remove(value, head);
-//	}
+	public void remove(E value)
+	{
+	    head = remove(value, head);
+	}
 	
 	/**
 	 * Removes the first occurrence of the specified value in the (sub)list
@@ -58,24 +58,33 @@ public class LinkedList<E>
 	 * @param start the head of the (sub)list
 	 * @return the node (or null) to which the reference previously pointing at start should point
 	 */
-//	private ListNode remove(E value, ListNode start)
-//	{
-//	    //if thing at start is value return start.next
-//	
-	   //start.next = remove(value, start.next);
-//	}
+	private ListNode remove(E value, ListNode start)
+	{
+       if(start == null)
+    	   return null;
+    		
+       if(start.value.equals(value))
+    		return start.next;
 	
-//	public boolean contains(E value)
-//	{
-//	    head = contains(value, head);
-//	}
-//	
-//	private boolean contains(E value, ListNode start)
-//	{
-//	    // return true when element is = to start value
+	    start.next = remove(value, start.next);
+	}
+	
+	public boolean contains(E value)
+	{
+	    return contains(value, head);
+	}
+	
+	private boolean contains(E value, ListNode start)
+	{
+	    if(start == null)
+	    	return false;
+	    
+	    if(start.value.equals(value))
+	    	return true;
+	    
+		return contains(value, start.next);
 		
-		//start.next = contains(value, start.next);
-//	}
+	}
 	
 	public String toString()
     {
