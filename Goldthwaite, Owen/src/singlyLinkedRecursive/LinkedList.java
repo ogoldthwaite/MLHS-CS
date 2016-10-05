@@ -95,15 +95,6 @@ public class LinkedList<E>
     	// [(value), (value), (value)]
     }
     
-    public void print (ListNode l)
-    {
-      if (l == null)
-        return;
-      else {
-        System.out.println(l.value);
-        print(l.next);
-      };
-    }
 	
 	private class ListNode
 	{
