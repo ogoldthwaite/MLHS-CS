@@ -44,7 +44,7 @@ public class MyLinkedListTest extends TestCase
         // TODO: test invalid adds
     }
     
-    public void testRemove()
+  public void testRemove()
     {
         realLinkedList.remove();
         myLinkedList.remove();
@@ -74,5 +74,28 @@ public class MyLinkedListTest extends TestCase
             assertTrue(realLinkedList.get(i).equals(myLinkedList.get(i)));
         
         // TODO: test invalid gets
+    }
+    
+    public void testInsert()
+    {
+    	LinkedList<Integer> insertList = new LinkedList<Integer>();
+    	MyLinkedList<Integer> myInsertList = new MyLinkedList<Integer>();
+    	myLinkedList.clear();
+    	for(int i = 0; i <= 3; i++)
+    	{
+    		insertList.add(i);
+    		myInsertList.add(i);
+    	}
+        for(int k = 4; k <= 7; k++)
+    	{
+    		myLinkedList.add(k);
+    		realLinkedList.add(k);
+    	}
+    
+        myLinkedList.insert(0, myInsertList);
+        //realLinkedList.(2, myInsertList);
+        System.out.println("ran!");
+        System.out.println(myLinkedList.toString());
+        //assertTrue(realLinkedList.toString().equals(myLinkedList.toString()));
     }
 }

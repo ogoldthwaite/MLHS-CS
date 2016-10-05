@@ -27,8 +27,7 @@ public class MyLinkedList<E>
         	throw new IndexOutOfBoundsException();
     	ListNode<E> addNode = new ListNode<E>(element, getNode(index-1), getNode(index));
     	getNode(index).prev = addNode;
-    	getNode(index - 1).next = addNode;
-    	
+    	getNode(index - 1).next = addNode;  	
 		
 	size++;
     	
@@ -149,8 +148,20 @@ public class MyLinkedList<E>
         return size;
     }
     
-    //public void insert(int index, MyLinkedList<E> listInsert)
+    public void insert(int index, MyLinkedList<E> listInsert)
     {
+    	if(index < 0 || index >= size)
+        	throw new IndexOutOfBoundsException();
+    	
+    	size += listInsert.size;
+    	ListNode<E> endNode =  getNode(index);
+    	listInsert.head.next.prev = endNode;
+    	endNode.next = listInsert.head.next;
+    	listInsert.tail.prev.next = getNode(index + listInsert.size);
+    	getNode(index + listInsert.size).prev = listInsert.tail.prev;
+    	
+    	
+    
     	
     }
     
@@ -165,6 +176,7 @@ public class MyLinkedList<E>
         }
     	printString += "]";
     	System.out.println(printString); //to test printing
+    	
     	return printString; 
     }
     
