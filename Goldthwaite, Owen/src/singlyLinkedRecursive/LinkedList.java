@@ -1,5 +1,7 @@
 package singlyLinkedRecursive;
 
+import java.util.ArrayList;
+
 public class LinkedList<E>
 {
     // does not use a dummy head node
@@ -16,7 +18,7 @@ public class LinkedList<E>
 	 */
 	public void add(E value)
 	{
-	    add(value, head);
+	    head = add(value, head);
 	}
 	
 	/**
@@ -46,7 +48,7 @@ public class LinkedList<E>
 	 */
 //	public void remove(E value)
 //	{
-//	    
+//	    head = remove(value, head);
 //	}
 	
 	/**
@@ -58,17 +60,21 @@ public class LinkedList<E>
 	 */
 //	private ListNode remove(E value, ListNode start)
 //	{
-//	    
+//	    //if thing at start is value return start.next
+//	
+	   //start.next = remove(value, start.next);
 //	}
 	
 //	public boolean contains(E value)
 //	{
-//	    
+//	    head = contains(value, head);
 //	}
 //	
 //	private boolean contains(E value, ListNode start)
 //	{
-//	    
+//	    // return true when element is = to start value
+		
+		//start.next = contains(value, start.next);
 //	}
 	
 	public String toString()
@@ -83,19 +89,28 @@ public class LinkedList<E>
     	if(start == null)
     		return "";
     	
-    	if(start.next == null)
+    	String coolString = start.value.toString();
+    	
+    	if(start.next != null)
     	{
-    		System.out.println("ran");
-    		return (String) start.value;
+    		coolString +=", ";
     	}
-    		else
-    	return start.value +", " + toString(start.next);
+    	
+    		coolString += toString(start.next);
 
+    			return coolString;
     	//return "";
     	// [(value), (value), (value)]
     }
     
-	
+	public ArrayList<E> reverse(ListNode start)
+	{
+		// if(start == null) //dont know if this is right base case
+		 
+		
+		return null;
+	}
+    
 	private class ListNode
 	{
 	    public ListNode next;
