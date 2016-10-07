@@ -29,20 +29,53 @@ public class Stack<E>
     
     public void push(E x)
     {
-    	Object[] stackCopy = new Object[stackAttack.length*2+1];
     	if(stackAttack.length == size)
+    	{
+    		Object[] stackCopy = new Object[stackAttack.length*2+1];
         	System.arraycopy(stackAttack, 0, stackCopy, 0, (stackAttack.length));
+    	}
+    	int count = stackAttack.length - 1;
+    	for(int i = size; i >= 0; i--)
+    	{
+    		stackAttack[count - 1] = stackAttack[count];
+    		count--;
+    	}
+    		
     	stackAttack[stackAttack.length - 1] = x;
         size++;
     }
     
     public E pop()
     {
-        
+        if(!(isEmpty()))
+        	throw new IllegalArgumentException();
+    	
+        E returnValue = (E) stackAttack[stackAttack.length - 1];
+    	
+    	Object[] stackCopy = new Object[stackAttack.length - 1];
+    	System.arraycopy(stackAttack, 0, stackCopy, 0, (stackAttack.length-1));
+    	stackAttack = stackCopy;
+    	size--;
+    		return returnValue;
+    			
+    	
     }
     
     public E peek()
     {
-        
+        return (E) stackAttack[stackAttack.length - 1];
+    }
+
+    public String toString()
+    {
+    	String coolString = "[";
+    	for(int i = 0; i < stackAttack.length; i++)
+    	{
+    		coolString += stackAttack[i];
+    			if((!(i == stackAttack.length - 1)))
+    				coolString += ", ";
+    	}
+    	return coolString + "]";
+    		
     }
 }
