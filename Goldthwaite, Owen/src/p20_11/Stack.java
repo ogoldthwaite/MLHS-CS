@@ -34,13 +34,7 @@ public class Stack<E>
     		Object[] stackCopy = new Object[stackAttack.length*2+1];
         	System.arraycopy(stackAttack, 0, stackCopy, 0, (stackAttack.length));
     	}
-    	int count = stackAttack.length - 1;
-    	for(int i = size; i >= 0; i--)
-    	{
-    		stackAttack[count - 1] = stackAttack[count];
-    		count--;
-    	}
-    		
+    	
     	stackAttack[stackAttack.length - 1] = x;
         size++;
     }
@@ -51,10 +45,8 @@ public class Stack<E>
         	throw new IllegalArgumentException();
     	
         E returnValue = (E) stackAttack[stackAttack.length - 1];
-    	
-    	Object[] stackCopy = new Object[stackAttack.length - 1];
-    	System.arraycopy(stackAttack, 0, stackCopy, 0, (stackAttack.length-1));
-    	stackAttack = stackCopy;
+
+    	stackAttack[stackAttack.length - 1] = null;
     	size--;
     		return returnValue;
     			
