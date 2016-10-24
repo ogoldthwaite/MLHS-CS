@@ -17,11 +17,11 @@ public class DirectoryTraverse {
 
 		if (coolFile.isDirectory())
 		{
-			String files[]; 	
+			File files[]; 	
 			files = coolFile.listFiles();
 			for(int i = 0; i < files.length; i++)
 			{
-				printDirectory(files[i]);
+				printDirectory(files[i].getName());
 			}
 			
 		}
