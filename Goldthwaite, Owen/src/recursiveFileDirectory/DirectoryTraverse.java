@@ -6,22 +6,24 @@ public class DirectoryTraverse {
 
 	public static void main(String[] args) 
 	{
-		String path = "/users/ogoldthwaite/documents";
-		printDirectory(path);
+		String path = "/users/ogoldthwaite/downloads";
+		File coolFile = new File(path);
+		
+		printDirectory(coolFile);
 
 	}
 
-	public static void printDirectory(String path)	
+	public static void printDirectory(File coolFile)	
 	{
-		File coolFile = new File(path);
 
 		if (coolFile.isDirectory())
 		{
 			File files[]; 	
 			files = coolFile.listFiles();
+			
 			for(int i = 0; i < files.length; i++)
 			{
-				printDirectory(files[i].getName());
+				printDirectory(files[i]);
 			}
 			
 		}
