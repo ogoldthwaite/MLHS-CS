@@ -24,7 +24,7 @@ public class Decode
 			if(compareToDict)
 			answer += null; //CHANGE THIS STUFF 
 		else  
-		
+		Integer.h
 		return answer;
 	}
 
@@ -65,7 +65,8 @@ public class Decode
 		{
 			e.printStackTrace();
 		}
-
+		//hasnext()? Nextline?()
+		//add every word in dictionary to a hashset and compare against that
 
 
 	}
