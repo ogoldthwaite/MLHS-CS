@@ -1,23 +1,61 @@
 package setExcersises;
 
+import java.awt.Color;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 public class SetStuffTester {
 
 	public static void main(String[] args) 
 	{
-		
-
+		listWords();
+		colorPresent();
 	}
 
 	public static void listWords()
 	{
+		TreeSet<String> plant = new TreeSet<String>();
 		Scanner scan = new Scanner(System.in);
-		//split(" ") to split into words
+		String acorns = scan.nextLine();
+		String[] roots = acorns.split(" ");
 		
+		for(int i =0; i < roots.length; i++)
+			plant.add(roots[i]);
+		System.out.println(plant);
 	}
 	
-	
+	public static void colorPresent()
+	{
+		HashSet<Color> rainbow = new HashSet<Color>();
+		rainbow.add(Color.BLACK);
+		rainbow.add(Color.BLUE);
+		rainbow.add(Color.CYAN);
+		rainbow.add(Color.DARK_GRAY);
+		rainbow.add(Color.GRAY);
+		rainbow.add(Color.GREEN);
+		rainbow.add(Color.LIGHT_GRAY);
+		rainbow.add(Color.MAGENTA);
+		rainbow.add(Color.ORANGE);
+		rainbow.add(Color.PINK);
+		rainbow.add(Color.RED);
+		rainbow.add(Color.WHITE);
+		rainbow.add(Color.YELLOW);
+		
+		Scanner scan = new Scanner(System.in);
+		float h = scan.nextFloat();
+		float s = scan.nextFloat();
+		float b = scan.nextFloat();
+		
+		Color coolColor = new Color(h, s, b);
+		
+		if(rainbow.contains(coolColor))
+			System.out.println("Color present!");
+		else
+			System.out.println("Your color is in another castle!");
+		
+		
+	}
 	
 
 }
