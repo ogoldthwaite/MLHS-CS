@@ -14,17 +14,23 @@ public class Decode
 	public String breakCode()
 	{
 		String answer = "";
-		System.out.println(toDecode);
-		shift();
-		System.out.println(toDecode);
-		shift();
-		System.out.println(toDecode);
-	
+		//System.out.println(toDecode);
+		//shift();
+
+		String[] codeFragments = toDecode.split(" ");
 		
-			if(compareToDict)
-			answer += null; //CHANGE THIS STUFF 
-		else  
-		Integer.h
+			if(compareToDict(codeFragments[0]))
+			{
+				for(int i = 0; i < codeFragments.length; i++)
+					answer += codeFragments[i];
+			}
+			else
+			{
+				shift();
+				System.out.println("1");
+				breakCode();
+			}
+
 		return answer;
 	}
 
@@ -58,16 +64,25 @@ public class Decode
 
 	private boolean compareToDict(String toTest)
 	{
+		HashSet<String> dictionary =  new HashSet<String>();
+		
 		try {
-			Scanner scan = new Scanner(new File("/users/share/dict/words"));
+			Scanner scan = new Scanner(new File("/usr/share/dict/words"));
+			
+			while(scan.hasNextLine())
+				dictionary.add(scan.nextLine());
 		} 
 		catch (FileNotFoundException e) 
 		{
 			e.printStackTrace();
 		}
-		//hasnext()? Nextline?()
-		//add every word in dictionary to a hashset and compare against that
-
+		
+		if(dictionary.contains(toTest))
+			return true;
+		else
+			return false;
+		
+		
 
 	}
 

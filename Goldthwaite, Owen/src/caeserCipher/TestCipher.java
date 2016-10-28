@@ -6,7 +6,9 @@ public class TestCipher {
 
 	public static void main(String[] args) 
 	{
-		Decode codedCode = new Decode("Hey I am Bob z");
+		Decode codedCode = new Decode("IFMMP");
+		//Hello
+		//IFMMP
 		System.out.println(codedCode.breakCode());
 	}
 

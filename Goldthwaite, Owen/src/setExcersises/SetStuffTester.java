@@ -22,6 +22,8 @@ public class SetStuffTester {
 		
 		for(int i =0; i < roots.length; i++)
 			plant.add(roots[i]);
+		
+		System.out.println(plant.size());
 		System.out.println(plant);
 	}
 	
@@ -53,8 +55,6 @@ public class SetStuffTester {
 			System.out.println("Color present!");
 		else
 			System.out.println("Your color is in another castle!");
-		
-		
 	}
 	
 
@@ -62,12 +62,12 @@ public class SetStuffTester {
 
 
 
-/* R 21.1 - It provides methods for add, remove, and contains
- * R 21.4 - Union: make a new set with all values from sets A and B, but both sets must be checked
- * 			for unique elements with contains so that no values are repeated.
+/* R 21.1 - Hash and tree set
+ * R 21.4 - Union: make a new set with values from sets A and B with the add method
  *          Intersection: Use contains to check against each set and then remove any value that does
  *          not appear in both sets.
- * R 21.5 - Union: Same way as above, hopefully. Intersection: Also same way as above, hopefully
+ * R 21.5 - Union: Same way as above, hopefully. Intersection: Also same way as above, hopefully.
+ * 			Wasn't sure what this question was asking
  * 
  * 
  * 
