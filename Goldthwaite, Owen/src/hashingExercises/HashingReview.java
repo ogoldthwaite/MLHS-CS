@@ -6,7 +6,11 @@ public class HashingReview {
 	{
 		verifyJimJoe();
 		verifyHashTable();
-
+		Student bob = new Student("Bob", "Smith", 420);
+		Student bob2 = new Student("Jeff", "Smith", 420);
+		
+		System.out.println(bob.hashCode());
+		System.out.println(bob2.hashCode());
 	}
 
 	public static void verifyJimJoe() //review 21.9
