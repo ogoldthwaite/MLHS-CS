@@ -11,6 +11,12 @@ public class HashingReview {
 		
 		System.out.println(bob.hashCode());
 		System.out.println(bob2.hashCode());
+		
+		BankAccount jeff = new BankAccount("Jeff" , 420);
+		BankAccount jeff2 = new BankAccount("Jeff", 420);
+		
+		System.out.println(jeff.hashCode());
+		System.out.println(jeff2.hashCode());
 	}
 
 	public static void verifyJimJoe() //review 21.9
