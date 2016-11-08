@@ -31,10 +31,7 @@ public class AnagramGrouperTest extends TestCase
         List<String> words = getWordList();
         
         AnagramGrouper ag = new AnagramGrouper(words);
-       System.out.println("");
-        System.out.println(ag.groups);
-        System.out.println(expectedGroups);
-        
+          
         assertTrue(ag.groups.equals(expectedGroups));
     }
     

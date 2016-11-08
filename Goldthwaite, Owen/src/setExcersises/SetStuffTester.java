@@ -9,8 +9,10 @@ public class SetStuffTester {
 
 	public static void main(String[] args) 
 	{
-		listWords();
-		colorPresent();
+		String bob = "bob";
+		System.out.println(bob.substring(0,1));
+		//listWords();
+		//colorPresent();
 	}
 
 	public static void listWords()
