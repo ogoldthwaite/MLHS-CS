@@ -8,14 +8,18 @@ public class MyHashMapTester<K, V> extends TestCase
 {
 	public void testContains()
 	{
-	MyHashMap myMap = new MyHashMap<String, Integer>();
-	HashMap map = new HashMap<String, Integer>();
+	MyHashMap<String, Integer> myMap = new MyHashMap<String, Integer>();
+	HashMap<String, Integer> map = new HashMap<String, Integer>();
 	
-	myMap.put("a", 1);
-	map.put("a", 1);
+	myMap.put("a", 5);
+	System.out.println(myMap);
 	
-	assertTrue(myMap.containsKey("a") == true);
-	assertTrue(map.containsKey("a") == true);
+	
+//	myMap.put("a", 1);
+//	map.put("a", 1);
+//	
+//	assertTrue(myMap.containsKey("a") == true);
+//	assertTrue(map.containsKey("a") == true);
 	}
 	
 	

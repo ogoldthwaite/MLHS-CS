@@ -19,7 +19,7 @@ public class MyHashMap<K, V>
 
 	public MyHashMap()
     {
-        table = new ArrayList<Map.Entry<K, V>>();
+        table = new ArrayList<Map.Entry<K, V>>(CAPACITY);
         size = 0;
     }
 
@@ -70,7 +70,7 @@ public class MyHashMap<K, V>
         return null;
     }
     
-    private int findKey(Object key) //returns index of key
+    public int findKey(Object key) //returns index of key
     {
     	int loc = key.hashCode() % CAPACITY;
         
@@ -99,7 +99,6 @@ public class MyHashMap<K, V>
     		loc++;
     	}
     		return loc;
-
     }
     
 }

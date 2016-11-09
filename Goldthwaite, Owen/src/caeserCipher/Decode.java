@@ -27,7 +27,7 @@ public class Decode
 			else
 			{
 				shift();
-				System.out.println("1");
+				System.out.println("1"); //here for testing stuff
 				breakCode();
 			}
 
@@ -81,8 +81,6 @@ public class Decode
 			return true;
 		else
 			return false;
-		
-		
 
 	}
 

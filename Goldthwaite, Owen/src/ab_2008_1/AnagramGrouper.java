@@ -18,7 +18,6 @@ public class AnagramGrouper
 			temp = itr.next();
 			tempSet.add(temp);
 			
-			
 			for(int i = 0; i < words.size(); i++)
 				if(createKeyString(temp).equals(createKeyString(words.get(i))))
 					tempSet.add(words.get(i));
@@ -47,11 +46,8 @@ public class AnagramGrouper
 			}
 			
 			if(temp.getValue().size() == max)
-				bigBods.add(temp.getValue());
-			
+				bigBods.add(temp.getValue());	
 		}
-		
-		
 		return bigBods; 
 	}
 	
