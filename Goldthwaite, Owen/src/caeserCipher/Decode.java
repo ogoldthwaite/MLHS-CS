@@ -13,25 +13,40 @@ public class Decode
 
 	public String breakCode()
 	{
-		String answer = "";
-		//System.out.println(toDecode);
-		//shift();
-
-		String[] codeFragments = toDecode.split(" ");
+		String answer = toDecode;
+		String storeCode = toDecode;
+		int maxValid = validWordCount(storeCode);
 		
-			if(compareToDict(codeFragments[0]))
+		for(int i = 0; i < 27; i++)
+		{
+
+			if(validWordCount(toDecode) > maxValid)
 			{
-				for(int i = 0; i < codeFragments.length; i++)
-					answer += codeFragments[i];
+				answer = toDecode;
+				maxValid = validWordCount(toDecode);
 			}
-			else
-			{
-				shift();
-				System.out.println("1"); //here for testing stuff
-				breakCode();
-			}
+			
+			shift();
+		}
+
+		toDecode = storeCode; //toDecode back to original
 
 		return answer;
+	}
+
+	private int validWordCount(String toTest) //returns the number of how many words are English words in a given string
+	{
+		int validWordCount = 0;
+
+		String[] words = toTest.split(" ");
+
+		for(int i = 0; i < words.length; i++)
+		{
+			if(compareToDict(words[i]))
+				validWordCount++;
+		}
+
+		return validWordCount;
 	}
 
 
@@ -52,23 +67,24 @@ public class Decode
 				if(pieceVals[i] > 25)
 					pieceVals[i] = pieceVals[i] % 26;
 			}
-			
+
 		}
 		codePieces = getCharValues(pieceVals);
 		String coolString = "";
 		for(int k = 0; k < codePieces.length; k++)
 			coolString += codePieces[k];
-		
+
 		toDecode = coolString;	
 	}
 
-	private boolean compareToDict(String toTest)
+	private boolean compareToDict(String toTest) //returns true if toTest is a word, false otherwise
 	{
 		HashSet<String> dictionary =  new HashSet<String>();
-		
+
 		try {
+			//Scanner scan = new Scanner(new File("/users/Owen/Documents/Dict/"));
 			Scanner scan = new Scanner(new File("/usr/share/dict/words"));
-			
+
 			while(scan.hasNextLine())
 				dictionary.add(scan.nextLine());
 		} 
@@ -76,7 +92,7 @@ public class Decode
 		{
 			e.printStackTrace();
 		}
-		
+
 		if(dictionary.contains(toTest))
 			return true;
 		else
@@ -85,7 +101,7 @@ public class Decode
 	}
 
 
-	private int[] getPieceValues(String[] pieces)
+	private int[] getPieceValues(String[] pieces)  //used in shift method
 	{
 		int[] pieceVals = new int[pieces.length];
 
@@ -149,7 +165,7 @@ public class Decode
 		return pieceVals;
 	}
 
-	private String[] getCharValues(int[] pieces)
+	private String[] getCharValues(int[] pieces)   //Used in shift method
 	{
 		String[] pieceChars = new String[pieces.length];
 
