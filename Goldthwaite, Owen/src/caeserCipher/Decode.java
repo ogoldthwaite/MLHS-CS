@@ -20,8 +20,11 @@ public class Decode
 		for(int i = 0; i < 27; i++)
 		{
 
-			if(validWordCount(toDecode) > maxValid)
+			if(validWordCount(toDecode) >= maxValid)
 			{
+				if(validWordCount(toDecode) == maxValid)
+					answer += "OR " + toDecode;
+				
 				answer = toDecode;
 				maxValid = validWordCount(toDecode);
 			}
@@ -82,7 +85,6 @@ public class Decode
 		HashSet<String> dictionary =  new HashSet<String>();
 
 		try {
-			//Scanner scan = new Scanner(new File("/users/Owen/Documents/Dict/"));
 			Scanner scan = new Scanner(new File("/usr/share/dict/words"));
 
 			while(scan.hasNextLine())
