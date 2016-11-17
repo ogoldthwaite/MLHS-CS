@@ -23,7 +23,7 @@ public class Decode
 			if(validWordCount(toDecode) >= maxValid)
 			{
 				if(validWordCount(toDecode) == maxValid)
-					answer += "OR " + toDecode;
+					answer += " OR " + toDecode;
 				
 				answer = toDecode;
 				maxValid = validWordCount(toDecode);

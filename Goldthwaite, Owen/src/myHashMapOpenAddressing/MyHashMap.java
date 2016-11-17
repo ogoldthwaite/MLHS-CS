@@ -21,6 +21,9 @@ public class MyHashMap<K, V>
     {
         table = new ArrayList<Map.Entry<K, V>>(CAPACITY);
         size = 0;
+        
+        for(int i = 0; i <= CAPACITY; i++)
+        	table.add(i, null);
     }
 
     public int size()
