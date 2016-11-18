@@ -12,7 +12,7 @@ public class MyHashMapTester<K, V> extends TestCase
 	HashMap<String, Integer> map = new HashMap<String, Integer>();
 	
 	
-	//myMap.put("a", 5);
+	myMap.put("a", 5);
 	map.put("a", 1);
 	System.out.println(map);
 	System.out.println(myMap);

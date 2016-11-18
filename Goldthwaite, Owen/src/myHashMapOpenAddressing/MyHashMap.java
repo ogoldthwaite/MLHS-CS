@@ -2,6 +2,7 @@ package myHashMapOpenAddressing;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -24,6 +25,8 @@ public class MyHashMap<K, V>
         
         for(int i = 0; i <= CAPACITY; i++)
         	table.add(i, null);
+       
+
     }
 
     public int size()
@@ -42,14 +45,19 @@ public class MyHashMap<K, V>
     
     public V put(K key, V value)
     {
-    	V temp = get(key);
+        Entry<K, V> testMap = new SimpleEntry<K, V>(key, value);
+        table.add(50, testMap);
+        
+        System.out.println(findKey(key));
     	
-    	Map.Entry<K, V> worldMap = new SimpleEntry<K, V>(key, value);
-     	table.add(getFirstOpen(key), worldMap);
-
-     	size++;
-     	return temp;
-		
+        return null;
+//    	V temp = get(key);
+//    	
+//    	Map.Entry<K, V> worldMap = new SimpleEntry<K, V>(key, value);
+//     	table.add(getFirstOpen(key), worldMap);
+//
+//     	size++;
+//     	return temp;
     }
     
     public V get(Object key)
@@ -76,15 +84,18 @@ public class MyHashMap<K, V>
     public int findKey(Object key) //returns index of key
     {
     	int loc = key.hashCode() % CAPACITY;
-        
-    	while(table.get(loc) != null)
+    	System.out.println(loc);
+    	 
+    	while(!(table.get(loc).getKey().equals(key))) //Originally !null, !(table.get(loc).getKey.equals(key))
     	{
     		if(loc >= CAPACITY)
     			loc = 0;
     		
     		if(table.get(loc).getKey().equals(key))
+    		{
+    			System.out.println(loc);
     			return loc;
-    		
+    		}
     		loc++;
     	}
     		return -10;
