@@ -14,7 +14,8 @@ public abstract class LinkedBinaryTree<E>
     
     public LinkedBinaryTree()
     {
-        
+        root = null;
+        size = 0;
     }
     
     /** 
@@ -23,23 +24,41 @@ public abstract class LinkedBinaryTree<E>
      */
     public int size()
     {
-        
+        return size;
     }
     
     public boolean contains(E element)
     {
-        
+        return contains(root, root.value);
     }
     
     private boolean contains(TreeNode<E> node, E element)
     {
+    	if(node.value == null)
+        	return false;
         
+    	if(node.value.equals(element))
+    		return true;
+    	
+        if(contains(node.left, node.left.value) || contains(node.right, node.right.value))
+        	return true;
+        	
+        return false;
     }
     
     public abstract void add(E element);
     
     public List<E> levelOrder()
     {
+        LinkedList<TreeNode<E>> nodes = new LinkedList<TreeNode<E>>();
+        nodes.add(this.root);
+        TreeNode<E> tempNode = new TreeNode<E>();
+        
+        for(int i = 0; i < size; i++)
+        {
+        	
+        }
+        	
         
     }
     

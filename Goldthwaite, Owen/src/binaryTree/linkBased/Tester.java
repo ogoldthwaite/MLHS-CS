@@ -50,6 +50,17 @@ public class Tester extends TestCase
         tree = null;
     }
     
+    public void testContains()
+    {
+        Integer[] inTree = new Integer[]{1, 2, 3, 4, 5, 6, 7, 9, 11};
+        for(Integer val : inTree)
+            assertTrue(tree.contains(val));
+        
+        Integer[] notInTree = new Integer[]{0, 8, 10, 12};
+        for(Integer val : notInTree)
+            assertTrue( ! tree.contains(val) );
+    }
+    
     public void testLevelOrder()
     {
         assertTrue(9 == tree.size());
