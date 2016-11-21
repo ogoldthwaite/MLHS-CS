@@ -56,9 +56,13 @@ public class Tester extends TestCase
         for(Integer val : inTree)
             assertTrue(tree.contains(val));
         
+        System.out.println(tree.contains(15));
+        
         Integer[] notInTree = new Integer[]{0, 8, 10, 12};
         for(Integer val : notInTree)
             assertTrue( ! tree.contains(val) );
+        
+        System.out.println(tree.contains(15));
     }
     
     public void testLevelOrder()

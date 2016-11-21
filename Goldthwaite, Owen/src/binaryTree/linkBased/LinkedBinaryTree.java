@@ -29,14 +29,14 @@ public abstract class LinkedBinaryTree<E>
     
     public boolean contains(E element)
     {
-        return contains(root, root.value);
+        return contains(this.root, element);
     }
     
     private boolean contains(TreeNode<E> node, E element)
     {
     	if(node.value == null)
         	return false;
-        
+
     	if(node.value.equals(element))
     		return true;
     	
