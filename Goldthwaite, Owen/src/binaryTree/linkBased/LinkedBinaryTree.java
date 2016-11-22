@@ -3,6 +3,7 @@ package binaryTree.linkBased;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * A binary tree.
@@ -34,13 +35,13 @@ public abstract class LinkedBinaryTree<E>
     
     private boolean contains(TreeNode<E> node, E element)
     {
-    	if(node.value == null)
+    	if(node == null)
         	return false;
 
     	if(node.value.equals(element))
     		return true;
     	
-        if(contains(node.left, node.left.value) || contains(node.right, node.right.value))
+        if(contains(node.left, element) || contains(node.right, element))
         	return true;
         	
         return false;
@@ -51,11 +52,20 @@ public abstract class LinkedBinaryTree<E>
     public List<E> levelOrder()
     {
         LinkedList<TreeNode<E>> nodes = new LinkedList<TreeNode<E>>();
-        nodes.add(this.root);
-        TreeNode<E> tempNode = new TreeNode<E>();
+        Queue<TreeNode<E>> nodeQ = new LinkedList<TreeNode<E>>();
+        TreeNode<E> NodeL = new TreeNode<E>();
+        TreeNode<E> NodeR = new TreeNode<E>();
         
-        for(int i = 0; i < size; i++)
+        nodeQ.offer(this.root);
+        NodeL = root.left;
+        NodeR = root.right;
+        
+        while(nodeQ.size() != 0)
         {
+        	//Add something from queue to list, add it's kids to the queue.
+        	
+        	nodeQ.offer(NodeL);
+        	nodeQ.offer(NodeR);
         	
         }
         	
