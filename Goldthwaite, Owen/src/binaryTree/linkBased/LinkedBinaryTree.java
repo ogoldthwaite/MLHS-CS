@@ -51,23 +51,40 @@ public abstract class LinkedBinaryTree<E>
     
     public List<E> levelOrder()
     {
-        LinkedList<TreeNode<E>> nodes = new LinkedList<TreeNode<E>>();
+        List<E> nodes = new LinkedList<E>();
         Queue<TreeNode<E>> nodeQ = new LinkedList<TreeNode<E>>();
-        TreeNode<E> NodeL = new TreeNode<E>();
-        TreeNode<E> NodeR = new TreeNode<E>();
+        TreeNode<E> tempNode = new TreeNode<E>();
+        
+        TreeNode<E> nodeNull = new TreeNode<E>();
+        nodeNull.value = null;
         
         nodeQ.offer(this.root);
-        NodeL = root.left;
-        NodeR = root.right;
-        
+           
         while(nodeQ.size() != 0)
         {
-        	//Add something from queue to list, add it's kids to the queue.
+        	tempNode = nodeQ.peek();
         	
-        	nodeQ.offer(NodeL);
-        	nodeQ.offer(NodeR);
+        	System.out.println(tempNode);
         	
+        	if(tempNode == null)
+        		nodes.add(null);
+        	else
+        		nodes.add(nodeQ.poll().value);
+        	
+        	System.out.println(nodes.toString());
+        	System.out.println(nodeQ.size());
+        	
+//        	nodeQ.offer(tempNode.left);
+//        	nodeQ.offer(tempNode.right);
+
+          if(tempNode.left != null)
+        	nodeQ.offer(tempNode.left);
+          if(tempNode.right != null)
+        	nodeQ.offer(tempNode.right);
         }
+		System.out.println(nodes.toString());
+        
+        return nodes;
         	
         
     }
