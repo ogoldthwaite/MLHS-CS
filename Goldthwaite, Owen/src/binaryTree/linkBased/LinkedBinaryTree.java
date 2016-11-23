@@ -51,76 +51,95 @@ public abstract class LinkedBinaryTree<E>
     
     public List<E> levelOrder()
     {
-        List<E> nodes = new LinkedList<E>();
-        Queue<TreeNode<E>> nodeQ = new LinkedList<TreeNode<E>>();
-        TreeNode<E> tempNode = new TreeNode<E>();
-        
-        TreeNode<E> nodeNull = new TreeNode<E>();
-        nodeNull.value = null;
-        
-        nodeQ.offer(this.root);
-           
-        while(nodeQ.size() != 0)
-        {
-        	tempNode = nodeQ.peek();
-        	
-        	System.out.println(tempNode);
-        	
-        	if(tempNode == null)
-        		nodes.add(null);
-        	else
-        		nodes.add(nodeQ.poll().value);
-        	
-        	System.out.println(nodes.toString());
-        	System.out.println(nodeQ.size());
-        	
-//        	nodeQ.offer(tempNode.left);
-//        	nodeQ.offer(tempNode.right);
-
-          if(tempNode.left != null)
-        	nodeQ.offer(tempNode.left);
-          if(tempNode.right != null)
-        	nodeQ.offer(tempNode.right);
-        }
-		System.out.println(nodes.toString());
-        
-        return nodes;
-        	
-        
+       return levelOrder(true);     	    
     }
     
     public List<E> levelOrder(boolean includeNull)
-    {
-        
+    {      
+    	List<E> nodes = new LinkedList<E>();
+    	Queue<TreeNode<E>> nodeQ = new LinkedList<TreeNode<E>>();
+    	TreeNode<E> tempNode = new TreeNode<E>();
+
+    	nodeQ.offer(this.root);
+
+    	while(nodeQ.size() != 0)
+    	{
+    		tempNode = nodeQ.poll();
+
+    		if(includeNull)
+    		{
+    			if(tempNode == null)
+    				nodes.add(null);
+    			else
+    			{
+    				nodes.add(tempNode.value);
+    				nodeQ.offer(tempNode.left);
+    				nodeQ.offer(tempNode.right);
+    			}
+    		}
+    		else
+    		{
+    			nodes.add(tempNode.value);
+    			if(tempNode.left != null)
+    				nodeQ.offer(tempNode.left);
+    			if(tempNode.left != null)
+    				nodeQ.offer(tempNode.right);
+    		}
+    	}
+    	return nodes;       	    
     }
     
     public List<E> inOrder()
     {
-    	
+    	List<E> stuff = new LinkedList<E>();
+    	inOrder(root, stuff);
+    	return stuff;
     }
     
     private void inOrder(TreeNode<E> node, List<E> elementsInOrder)
     {
+    	if(node.left != null)
+    		inOrder(node.left, elementsInOrder);
     	
+    	elementsInOrder.add(node.value);
+    	
+    	if(node.right != null)
+    		inOrder(node.right, elementsInOrder);
     }
     
     public List<E> preOrder()
     {
-    	
+    	List<E> stuff = new LinkedList<E>();
+    	preOrder(root, stuff);
+    	return stuff;
     }
     
     private void preOrder(TreeNode<E> node, List<E> elementsPreOrder)
     {
+    	elementsPreOrder.add(node.value);
     	
+    	if(node.left != null)
+    		preOrder(node.left, elementsPreOrder);
+    	
+    	if(node.right != null)
+    		preOrder(node.right, elementsPreOrder);
     }
     
     public List<E> postOrder()
     {
-    	
+    	List<E> stuff = new LinkedList<E>();
+    	postOrder(root, stuff);
+    	return stuff;
     }
     
     private void postOrder(TreeNode<E> node, List<E> elementsPostOrder)
     {
+    	if(node.left != null)
+    		postOrder(node.left, elementsPostOrder);
     	
+    	if(node.right != null)
+    		postOrder(node.right, elementsPostOrder);
+    	
+    	elementsPostOrder.add(node.value);
     }
 }
