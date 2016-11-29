@@ -61,6 +61,10 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
     protected TreeNode<E> add(TreeNode<E> node, E element)
     {
     	//Fist thing added is the root value, so this if statement is a silly goose
+    	
+    	if(size == 0)
+    		setRoot(constructNewNode(element));
+    	
     	if(node.left == null && element.compareTo(node.value) < 0)
     	{	
     		node.left = constructNewNode(element);
@@ -71,7 +75,6 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
     	{
     		node.right = constructNewNode(element);
     		return node;
-    	
     	}
     	
     	if(element.compareTo(node.value) < 0)
@@ -80,6 +83,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
     	if(element.compareTo(node.value) >= 0)
     		return add(node.right, element);
     	
+    	size++;
     	return node;
     	
     	
