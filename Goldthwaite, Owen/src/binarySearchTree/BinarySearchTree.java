@@ -109,9 +109,20 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
 			{
 					return node.left;
 			}
-			else
+			else //Two Children
 			{
-				while(node.) //Two children
+				TreeNode<E> swapNode = node.right;
+				E storeVal = node.value;
+				
+				while(swapNode.left != null)
+				{
+					swapNode = swapNode.left;
+				}
+								
+				node.value = swapNode.value;
+				swapNode.value = storeVal;		
+				 
+				node.right = remove(node.right, element);
 			}
 			
 			
@@ -119,38 +130,43 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
 		return node;
 	}
     
-//    public E min()
-//    {
-//        
-//    }
-//    
-//    private TreeNode<E> min(TreeNode<E> node)
-//    {
-//        
-//    }
-//    
-//    public E max()
-//    {
-//        
-//    }
-//    
-//    protected TreeNode<E> rotateRight(TreeNode<E> node)
-//    {
-//        
-//    }
-//    
-//    protected TreeNode<E> rotateLeft(TreeNode<E> node)
-//    {
-//        
-//    }
-//    
-//    protected TreeNode<E> rotateRightLeft(TreeNode<E> node)
-//    {
-//        
-//    }
-//    
-//    protected TreeNode<E> rotateLeftRight(TreeNode<E> node)
-//    {
-//        
-//    }
+	public E min()
+	{
+		return min(getRoot()).value;
+	}
+
+	private TreeNode<E> min(TreeNode<E> node)
+	{
+		while(node.left != null)
+		{
+			node = node.left;
+		}
+
+		return node;
+	}
+    
+    public E max()
+    {
+        
+    }
+    
+    protected TreeNode<E> rotateRight(TreeNode<E> node)
+    {
+        
+    }
+    
+    protected TreeNode<E> rotateLeft(TreeNode<E> node)
+    {
+        
+    }
+    
+    protected TreeNode<E> rotateRightLeft(TreeNode<E> node)
+    {
+        
+    }
+    
+    protected TreeNode<E> rotateLeftRight(TreeNode<E> node)
+    {
+        
+    }
 	}
