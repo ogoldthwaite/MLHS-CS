@@ -189,6 +189,7 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
     
     protected TreeNode<E> rotateLeftRight(TreeNode<E> node)
     {
-        
+    	node.left = rotateLeft(node.left);
+        return rotateRight(node);
     }
 	}
