@@ -14,8 +14,10 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
     }
     
     protected AVLTreeNode<E> add(TreeNode<E> node, E element)
-    {
-    	return (AVLTreeNode<E>) super.add(node, element);
+    {	
+    	AVLTreeNode<E> tempNode = constructNewNode(super.add(node, element).value);
+    	return rebalance((AVLTreeNode<E>) tempNode);
+    			
     }
     
 //    protected TreeNode<E> remove(TreeNode<E> node, E element)
@@ -30,13 +32,14 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
     	
     	if(lNode == null && rNode == null)
     		node.height = 0;
-    	
-    	if(lNode.height >= rNode.height && lNode != null)
+    	else
+    	{
+    		if(rNode == null || rNode.height <= lNode.height)// && lNode != null)
     		node.height = lNode.height + 1;
     			
-    	if(lNode.height <= rNode.height && rNode != null)
+    		if(lNode == null || lNode.height <= rNode.height)// && rNode != null)
 			node.height = rNode.height + 1;
-    			
+    	}		
     }
     
     private int balanceFactor(AVLTreeNode<E> node)
@@ -59,17 +62,31 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
     // returns the reference that whatever previously pointed at node should now point
     private AVLTreeNode<E> rebalance(AVLTreeNode<E> node)
     {
+    	updateHeight(node);
     	AVLTreeNode<E> lNode = (AVLTreeNode<E>) node.left;
     	AVLTreeNode<E> rNode = (AVLTreeNode<E>) node.right;
     	int balFact = balanceFactor(node);
     	
     	if(balFact <= -2)
-    	{
     		if(-1 == balanceFactor(lNode))
     			rotateRight(node);
-    	}
+    		else if(1 == balanceFactor(rNode))
+    		{
+    			node.left = rotateLeft(node.left);
+    			rotateRight(node);
+    		}	
     	
     	
+    	if(balFact >= 2)
+    		if(1 == balanceFactor(rNode))
+    			rotateLeft(node);
+    		else if(-1 == balanceFactor(rNode))
+    		{
+    			node.right = rotateRight(node.right);
+    			rotateLeft(node);
+    		}	
+    	updateHeight(node);
+    	return node;
     }
 	
     // returns the value to which the pointer previously pointing to node
