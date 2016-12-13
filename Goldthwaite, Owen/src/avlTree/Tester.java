@@ -57,7 +57,7 @@ public class Tester extends TestCase
         check(6, "[7, 5, 9, 3, null, null, 11, null, null, null, null]");
         
         tree.add(4);
-        check(7, "[7, 4, 9, 3, 5, null, 11, null, null, null, null, null, null]");
+       check(7, "[7, 4, 9, 3, 5, null, 11, null, null, null, null, null, null]");
     }
     
     public void testAddWithRebalanceAtRoot()

@@ -192,4 +192,9 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
     	node.left = rotateLeft(node.left);
         return rotateRight(node);
     }
-	}
+    
+    public String toString()
+    {
+    	return super.levelOrder().toString();
+    }
+}
