@@ -16,21 +16,24 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
 	protected AVLTreeNode<E> add(TreeNode<E> node, E element)
 	{	
 		AVLTreeNode<E> tempNode = (AVLTreeNode<E>) super.add(node, element);
-		//tempNode = rebalance((AVLTreeNode<E>) tempNode);
 		updateHeight(tempNode);
 		return rebalance(tempNode);
-
 	}
 
-//    protected TreeNode<E> remove(TreeNode<E> node, E element)
-//    {
-//        
-//    }
+    protected TreeNode<E> remove(TreeNode<E> node, E element)
+    {
+    	AVLTreeNode<E> tempNode = (AVLTreeNode<E>) super.remove(node, element);
+    	updateHeight(tempNode);
+    	return rebalance(tempNode);
+    }
 
 	private void updateHeight(AVLTreeNode<E> node)
 	{
+		if(node == null)
+			return;
+		
 		AVLTreeNode<E> lNode = (AVLTreeNode<E>) node.left;
-		AVLTreeNode<E> rNode = (AVLTreeNode<E>) node.right;   	
+		AVLTreeNode<E> rNode = (AVLTreeNode<E>) node.right;
 
 		if(lNode == null && rNode == null)
 			node.height = 0;
@@ -64,28 +67,25 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
 	// returns the reference that whatever previously pointed at node should now point
 	private AVLTreeNode<E> rebalance(AVLTreeNode<E> node)
 	{
+		if(node == null)
+			return null;
+		
 		AVLTreeNode<E> lNode = (AVLTreeNode<E>) node.left;
 		AVLTreeNode<E> rNode = (AVLTreeNode<E>) node.right;
 		int balFact = balanceFactor(node);
 
-		if(balFact <= -2)
+		if(balFact == -2)
 			if(-1 == balanceFactor(lNode))
 				node = rotateRight(node);
-			else if(1 == balanceFactor(rNode))
-			{
+			else if(1 == balanceFactor(lNode))
 				node = (AVLTreeNode<E>) super.rotateLeftRight(node);
-			}	
 
 
-		if(balFact >= 2)
+		if(balFact == 2)
 			if(1 == balanceFactor(rNode))
 				node = rotateLeft(node);
 			else if(-1 == balanceFactor(rNode))
-			{
 				node = (AVLTreeNode<E>) super.rotateRightLeft(node);
-//				node.right = rotateRight(node.right);
-//				rotateLeft(node);
-			}	
 		
 		return node;
 	}
