@@ -24,47 +24,47 @@ public class Tester extends TestCase
         check(3, "[13, 7, 15, null, null, null, null]");
     }
     
-//    public void testAddWithRightRotationToRebalance()
-//    {
-//        addToTree(new int[]{7, 5, 9, 3, 6});
-//        check(5, "[7, 5, 9, 3, 6, null, null, null, null, null, null]");
-//        
-//        tree.add(1);
-//        check(6, "[5, 3, 7, 1, null, 6, 9, null, null, null, null, null, null]");
-//    }
-//    
-//    public void testAddWithLeftRotationToBalance()
-//    {
-//        addToTree(new int[]{7, 5, 9, 3, 6, 11});
-//        check(6, "[7, 5, 9, 3, 6, null, 11, null, null, null, null, null, null]");
-//        
-//        tree.add(12);
-//        check(7, "[7, 5, 11, 3, 6, 9, 12, null, null, null, null, null, null, null, null]");
-//    }
-//    
-//    public void testAddWithRightLeftRotationToBalance()
-//    {
-//        addToTree(new int[]{7, 5, 9, 3, 6, 11});
-//        check(6, "[7, 5, 9, 3, 6, null, 11, null, null, null, null, null, null]");
-//        
-//        tree.add(10);
-//        check(7, "[7, 5, 10, 3, 6, 9, 11, null, null, null, null, null, null, null, null]");
-//    }
-//    
-//    public void testAddWithLeftRightRotationToBalance()
-//    {
-//        addToTree(new int[]{7, 5, 9, 3, 11});
-//        check(5, "[7, 5, 9, 3, null, null, 11, null, null, null, null]");
-//        
-//        tree.add(4);
-//       check(6, "[7, 4, 9, 3, 5, null, 11, null, null, null, null, null, null]");
-//    }
-//    
-//    public void testAddWithRebalanceAtRoot()
-//    {
-//        addToTree(new int[]{7, 5, 3});
-//        check(3, "[5, 3, 7, null, null, null, null]");
-//    }
+    public void testAddWithRightRotationToRebalance()
+    {
+        addToTree(new int[]{7, 5, 9, 3, 6});
+        check(5, "[7, 5, 9, 3, 6, null, null, null, null, null, null]");
+        
+        tree.add(1);
+        check(6, "[5, 3, 7, 1, null, 6, 9, null, null, null, null, null, null]");
+    }
+    
+    public void testAddWithLeftRotationToBalance()
+    {
+        addToTree(new int[]{7, 5, 9, 3, 6, 11});
+        check(6, "[7, 5, 9, 3, 6, null, 11, null, null, null, null, null, null]");
+        
+        tree.add(12);
+        check(7, "[7, 5, 11, 3, 6, 9, 12, null, null, null, null, null, null, null, null]");
+    }
+    
+    public void testAddWithRightLeftRotationToBalance()
+    {
+        addToTree(new int[]{7, 5, 9, 3, 6, 11});
+        check(6, "[7, 5, 9, 3, 6, null, 11, null, null, null, null, null, null]");
+        
+        tree.add(10);
+        check(7, "[7, 5, 10, 3, 6, 9, 11, null, null, null, null, null, null, null, null]");
+    }
+    
+    public void testAddWithLeftRightRotationToBalance()
+    {
+        addToTree(new int[]{7, 5, 9, 3, 11});
+        check(5, "[7, 5, 9, 3, null, null, 11, null, null, null, null]");
+        
+        tree.add(4);
+       check(6, "[7, 4, 9, 3, 5, null, 11, null, null, null, null, null, null]");
+    }
+    
+    public void testAddWithRebalanceAtRoot()
+    {
+        addToTree(new int[]{7, 5, 3});
+        check(3, "[5, 3, 7, null, null, null, null]");
+    }
     
     public void testRemoveWithRightLeftRotationToBalance()
     {

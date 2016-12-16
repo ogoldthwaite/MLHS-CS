@@ -9,7 +9,6 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
 	{
 		AVLTreeNode<E> newNode = new AVLTreeNode<E>();
 		newNode.value = element;
-
 		return newNode;
 	}
 
@@ -77,10 +76,9 @@ public class AVLTree<E extends Comparable<? super E>> extends BinarySearchTree<E
 		if(balFact == -2)
 			if(-1 == balanceFactor(lNode))
 				node = rotateRight(node);
-			else if(1 == balanceFactor(lNode))
+			else if(1 == balanceFactor(lNode))			
 				node = (AVLTreeNode<E>) super.rotateLeftRight(node);
-
-
+				
 		if(balFact == 2)
 			if(1 == balanceFactor(rNode))
 				node = rotateLeft(node);

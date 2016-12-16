@@ -72,11 +72,9 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends LinkedBin
 	public boolean remove(E element)
 	{
 		boolean stuff = contains(element);
-		remove(getRoot(), element);
+		setRoot(remove(getRoot(), element));
 		size--;
 		return stuff;
-		
-		
 	}
 
 	/**
