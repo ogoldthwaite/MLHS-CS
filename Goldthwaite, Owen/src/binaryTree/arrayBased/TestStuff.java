@@ -15,11 +15,11 @@ public class TestStuff {
 		bob.add(6);
 		bob.add(7);
 		
-		ArrayBinaryTree bobster = new ArrayBinaryTree(bob);
-		System.out.println(bobster.levelOrder());
-		System.out.println(bobster.inOrder());
-		System.out.println(bobster.preOrder());
-		System.out.println(bobster.postOrder());
+//		ArrayBinaryTree bobster = new ArrayBinaryTree(bob);
+//		System.out.println(bobster.levelOrder());
+//		System.out.println(bobster.inOrder());
+//		System.out.println(bobster.preOrder());
+//		System.out.println(bobster.postOrder());
 
 	}
 

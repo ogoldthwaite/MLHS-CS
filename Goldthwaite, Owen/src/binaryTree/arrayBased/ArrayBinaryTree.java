@@ -14,10 +14,10 @@ public class ArrayBinaryTree<E>
 {
     protected ArrayList<E> elements;
     
-    public ArrayBinaryTree(ArrayList<E> stuff)
+    public ArrayBinaryTree()
     {
-       // this.elements = new ArrayList<E>();
-    	this.elements = stuff;
+       this.elements = new ArrayList<E>();
+    	//this.elements = stuff;
     }
     
     /** 

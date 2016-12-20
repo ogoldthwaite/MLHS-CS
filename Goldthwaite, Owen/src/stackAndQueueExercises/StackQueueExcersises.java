@@ -1,14 +1,14 @@
-package stackAndQueueExercises;
-
-public class StackQueueExcersises {
-
-	public static void main(String[] args) 
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-}
+//package stackAndQueueExercises;
+//
+//public class StackQueueExcersises {
+//
+//	public static void main(String[] args) 
+//	{
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//}
 
 
 /* Exercise R20.11 = queue 
@@ -25,4 +25,3 @@ public class StackQueueExcersises {
 
 
 
-*/
