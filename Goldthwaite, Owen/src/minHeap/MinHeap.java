@@ -8,20 +8,17 @@ public class MinHeap<E extends Comparable<? super E>> extends ArrayBinaryTree<E>
 	{
 		elements.add(element);
 		int index = elements.size() - 1;
-		int parentIndex = getParentIndex(index);  	
-
+		//int parentIndex = getParentIndex(index);  	
+		
 		//System.out.println(elements);
 
-		while((parentIndex >= 0) && elements.get(index).compareTo(elements.get(parentIndex)) < 0)
+		while(getParentIndex(index) >= 0 && elements.get(index).compareTo(elements.get(getParentIndex(index))) < 0)
 		{
-			//System.out.println(elements);
 			E temp = elements.get(index);
-			elements.set(index, elements.get(parentIndex));
-			elements.set(parentIndex, temp);
+			elements.set(index, elements.get(getParentIndex(index)));
+			elements.set(getParentIndex(index), temp);
 			index = getParentIndex(index);
 		}	
-
-		// elements.sort(null);
 
 	}
 
@@ -37,7 +34,6 @@ public class MinHeap<E extends Comparable<? super E>> extends ArrayBinaryTree<E>
 
 	public E peek()
 	{
-		// System.out.println(elements);
 		return elements.get(0);  
 	}
 
@@ -56,6 +52,7 @@ public class MinHeap<E extends Comparable<? super E>> extends ArrayBinaryTree<E>
 		//E min = elements.get(nodeIndex);
 		//int minIndex = nodeIndex;
 
+		
 		if(elements.size() != 0)
 		{
 			E min = elements.get(nodeIndex);

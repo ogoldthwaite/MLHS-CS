@@ -38,7 +38,7 @@ public class Tester extends TestCase
         
         for(Integer value: valuesInOrder)
         {
-           // assertTrue(value.equals(heap.peek()));
+        	assertTrue(value.equals(heap.peek()));
             assertTrue(value.equals(heap.remove()));
         }
     }
