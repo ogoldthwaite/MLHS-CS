@@ -10,7 +10,6 @@ public class MinHeap<E extends Comparable<? super E>> extends ArrayBinaryTree<E>
 		int index = elements.size() - 1;
 		//int parentIndex = getParentIndex(index);  	
 		
-		//System.out.println(elements);
 
 		while(getParentIndex(index) >= 0 && elements.get(index).compareTo(elements.get(getParentIndex(index))) < 0)
 		{
@@ -29,7 +28,6 @@ public class MinHeap<E extends Comparable<? super E>> extends ArrayBinaryTree<E>
 		fixHeap(0);
 
 		return returnVal;
-
 	}
 
 	public E peek()
