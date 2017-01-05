@@ -6,18 +6,16 @@ import java.util.Comparator;
 public class HeapSort
 {
 	private static int heapSize = 0;
-	private static ArrayList<Integer> elements;
 	
 	public static <T> void sort(T[] a, Comparator<T> c)
 	{
 		//c.compare(element1, element2); How you compare stuff!
-		//elements = a;
 		for(int i = 1; i < a.length; i++)
 		{
 			int pIndex = getParentIndex(i);
 			int k = i;
 			
-		while(c.compare(a[k], a[pIndex]) > 0 && pIndex > -1)
+		while(pIndex >= 0 && c.compare(a[k], a[pIndex]) > 0)
 		{
 			if (c.compare(a[k], a[pIndex]) > 0)
 			{
@@ -26,10 +24,19 @@ public class HeapSort
 				pIndex = getParentIndex(k); //change this k I think
 			}
 		}
-			
 			heapSize++;
 		}
 		
+		heapSize = a.length;
+		
+		for(int j = heapSize - 1; j >= 0; j--)
+		{
+			swap(a, 0, j);
+			fixHeap(a, c, 0);
+			heapSize--;
+		}
+		
+		System.out.println(heapSize);
 		System.out.println(a);
 		
 		
@@ -52,7 +59,7 @@ public class HeapSort
 	        return 2 * parentIndex + (left ? 1 : 2);
 	    }
 
-	 private void fixHeap(int nodeIndex)
+	 private static <T> void fixHeap(T[]a, Comparator<T> c, int nodeIndex)
 		{
 			int leftChildIndex = getChildIndex(nodeIndex, true);
 			int rightChildIndex = getChildIndex(nodeIndex, false);
@@ -60,35 +67,37 @@ public class HeapSort
 			//int minIndex = nodeIndex;
 
 			
-			if(elements.size() != 0)
+			if(heapSize - 1 != 0)
 			{
-				int min = elements.get(nodeIndex);
+				T min = a[nodeIndex];
 				int minIndex = nodeIndex;
 				
-				if(leftChildIndex < elements.size())
+				if(leftChildIndex < heapSize - 1)
 				{
-					fixHeap(leftChildIndex);
-					if(elements.get(leftChildIndex).compareTo(min) < 0)
+					fixHeap(a, c, leftChildIndex);
+					if(c.compare(a[leftChildIndex], min) < 0)
 					{
-						min = elements.get(leftChildIndex);
+						min = a[leftChildIndex];
 						minIndex = leftChildIndex;
 					}
 				}
 
-				if(rightChildIndex < elements.size())
+				if(rightChildIndex < heapSize - 1)
 				{
-					fixHeap(rightChildIndex);
-					if(elements.get(rightChildIndex).compareTo(min) < 0)
+					fixHeap(a, c, rightChildIndex);
+					if(c.compare(a[rightChildIndex], min) < 0)
 					{
-						min = elements.get(rightChildIndex);
+						min = a[rightChildIndex];
 						minIndex = rightChildIndex;
 					}
 
 				}	
 					if(minIndex != nodeIndex)
 					{	
-						elements.set(minIndex, elements.get(nodeIndex));
-						elements.set(nodeIndex, min);
+						a[minIndex] = a[nodeIndex];
+						a[nodeIndex] = min;
+						//elements.set(minIndex, elements.get(nodeIndex));
+						//elements.set(nodeIndex, min);
 					} 
 			} 	
 		}
