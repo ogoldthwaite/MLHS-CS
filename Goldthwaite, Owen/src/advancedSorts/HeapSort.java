@@ -1,6 +1,5 @@
 package advancedSorts;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 
 public class HeapSort
@@ -31,7 +30,9 @@ public class HeapSort
 		
 		for(int j = heapSize - 1; j >= 0; j--)
 		{
+			System.out.println(a[0] +" preswap");
 			swap(a, 0, j);
+			System.out.println(a[0]+ " postswamp");
 			fixHeap(a, c, 0);
 			heapSize--;
 		}
@@ -63,21 +64,19 @@ public class HeapSort
 		{
 			int leftChildIndex = getChildIndex(nodeIndex, true);
 			int rightChildIndex = getChildIndex(nodeIndex, false);
-			//E min = elements.get(nodeIndex);
-			//int minIndex = nodeIndex;
 
 			
-			if(heapSize - 1 != 0)
+			if(heapSize - 1  != 0)
 			{
-				T min = a[nodeIndex];
+				T max = a[nodeIndex];
 				int minIndex = nodeIndex;
 				
 				if(leftChildIndex < heapSize - 1)
 				{
 					fixHeap(a, c, leftChildIndex);
-					if(c.compare(a[leftChildIndex], min) < 0)
+					if(c.compare(a[leftChildIndex], max) > 0)
 					{
-						min = a[leftChildIndex];
+						max = a[leftChildIndex];
 						minIndex = leftChildIndex;
 					}
 				}
@@ -85,9 +84,9 @@ public class HeapSort
 				if(rightChildIndex < heapSize - 1)
 				{
 					fixHeap(a, c, rightChildIndex);
-					if(c.compare(a[rightChildIndex], min) < 0)
+					if(c.compare(a[rightChildIndex], max) > 0)
 					{
-						min = a[rightChildIndex];
+						max = a[rightChildIndex];
 						minIndex = rightChildIndex;
 					}
 
@@ -95,7 +94,7 @@ public class HeapSort
 					if(minIndex != nodeIndex)
 					{	
 						a[minIndex] = a[nodeIndex];
-						a[nodeIndex] = min;
+						a[nodeIndex] = max;
 						//elements.set(minIndex, elements.get(nodeIndex));
 						//elements.set(nodeIndex, min);
 					} 
