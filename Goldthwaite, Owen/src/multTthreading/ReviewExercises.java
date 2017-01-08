@@ -27,7 +27,15 @@ public class ReviewExercises {
  *  of some sort than it should process all the files, once complete it should then terminate and stop.
  *  R23.6 - If it works for you now in the future you may change something about your thread or call interrupt in a different way so in which
  *  the interrupted exception is not properly handled which could cause problems in the future. Maybe.
- * 
+ *  R23.7 - A race condition occurs when two different threads try to use an object at the same time and negatively effect the outcome of a 
+ *  the program because the thread can stop at the wrong point during its execution. This can be stopped by using a lock.
+ *  R23.8 - Deadlock occurs when a thread is locked and inside the locked portion of the thread some condition or something is never met and 
+ *  the thread stays locked for ever. This can be avoided by using the temporary unlock thing that I forget the name of with await().
+ *  R23.9 - A thread that uses sleep just stops running for at least a certain amount of time with no way to properly wake it up which would 
+ *  not help with a lock situation. Await allows a thread to stop running until it is signaled with signal method to run again. This makes
+ *  it much better for stopping deadlock.
+ *  R23.10 - If a thread causes await with no other signal to stop waiting than it will just keep waiting forever, although other threads will
+ *  still run as normal but the thread that called await will not.
  * 
  * 
  * 
