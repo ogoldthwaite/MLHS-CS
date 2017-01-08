@@ -4,12 +4,41 @@ import java.util.Comparator;
 
 public class HeapSort
 {
+	private static int heapSize = 0;
+	
 	public static <T> void sort(T[] a, Comparator<T> c)
 	{
 		//c.compare(element1, element2); How you compare stuff!
+		for(int i = 1; i < a.length; i++)
+		{
+			int pIndex = getParentIndex(i);
+			int k = i;
+			
+		while(pIndex >= 0 && c.compare(a[k], a[pIndex]) > 0)
+		{
+			if (c.compare(a[k], a[pIndex]) > 0)
+			{
+				swap(a, k, pIndex);
+				k = pIndex;
+				pIndex = getParentIndex(k); //change this k I think
+			}
+		}
+			heapSize++;
+		}
 		
+		heapSize = a.length;
 		
+		for(int j = heapSize - 1; j >= 0; j--)
+		{
+			System.out.println(a[0] +" preswap");
+			swap(a, 0, j);
+			System.out.println(a[0]+ " postswamp");
+			fixHeap(a, c, 0);
+			heapSize--;
+		}
 		
+		System.out.println(heapSize);
+		System.out.println(a);
 		
 		
 	}
@@ -31,6 +60,45 @@ public class HeapSort
 	        return 2 * parentIndex + (left ? 1 : 2);
 	    }
 
+	 private static <T> void fixHeap(T[]a, Comparator<T> c, int nodeIndex)
+		{
+			int leftChildIndex = getChildIndex(nodeIndex, true);
+			int rightChildIndex = getChildIndex(nodeIndex, false);
 
+			
+			if(heapSize - 1  != 0)
+			{
+				T max = a[nodeIndex];
+				int minIndex = nodeIndex;
+				
+				if(leftChildIndex < heapSize - 1)
+				{
+					fixHeap(a, c, leftChildIndex);
+					if(c.compare(a[leftChildIndex], max) > 0)
+					{
+						max = a[leftChildIndex];
+						minIndex = leftChildIndex;
+					}
+				}
+
+				if(rightChildIndex < heapSize - 1)
+				{
+					fixHeap(a, c, rightChildIndex);
+					if(c.compare(a[rightChildIndex], max) > 0)
+					{
+						max = a[rightChildIndex];
+						minIndex = rightChildIndex;
+					}
+
+				}	
+					if(minIndex != nodeIndex)
+					{	
+						a[minIndex] = a[nodeIndex];
+						a[nodeIndex] = max;
+						//elements.set(minIndex, elements.get(nodeIndex));
+						//elements.set(nodeIndex, min);
+					} 
+			} 	
+		}
 
 }
