@@ -80,6 +80,7 @@ public class MinHeap<E extends Comparable<? super E>> extends ArrayBinaryTree<E>
 				{	
 					elements.set(minIndex, elements.get(nodeIndex));
 					elements.set(nodeIndex, min);
+					//fixHeap(minIndex);
 				} 
 		} 	
 	}

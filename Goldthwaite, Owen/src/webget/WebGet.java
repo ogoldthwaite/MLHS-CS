@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,9 +18,10 @@ public class WebGet
 {
     public static void main(String[] args)
     {
-        String host = "www.google.com";
+        String host = "www.greggsmith.com";
         String resource = "/";
         System.out.println("Getting " + resource + " from " + host);
+        ArrayList<String> imgName = new ArrayList<String>();
 
         try
         {
@@ -47,10 +49,32 @@ public class WebGet
             {
                 String input = in.nextLine();
                 System.out.println(input);
+                
+                int start = input.indexOf("img src=\"");
+                int last = input.indexOf("\" class=");
+                String addString = "";
+                
+                for(int i = start + 6; i <= last; i++)
+                	addString += input.charAt(i);
+                
+                imgName.add(addString);
+                
+                
+                
+              //   System.out.println(start + " S");
+             //   System.out.print(last +" L");
+                
 
+                //System.out.println(input.substring(start, last));
+                	
+                //imgName.add(input.substring(start, last));
+                System.out.println(imgName);
+                	                	              
                 foundHTMLEndTag = input.toLowerCase().indexOf("</html>") != -1;
             }
 
+            
+            
             // Always close the socket at the end
             s.close();
             in.close();
