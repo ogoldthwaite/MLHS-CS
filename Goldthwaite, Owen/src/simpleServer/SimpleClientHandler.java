@@ -22,14 +22,15 @@ public class SimpleClientHandler implements Runnable
 		{
 			Scanner in = new Scanner(connectionToClient.getInputStream());
 			PrintWriter out = new PrintWriter(connectionToClient.getOutputStream());
-			Scanner scanKeyboard = new Scanner(System.in);
-			SendChat rChat =  new SendChat(in);
+			//Scanner scanKeyboard = new Scanner(System.in);
+			ReceiveChat rChat =  new ReceiveChat(in);
 			
+			//ADD SEND CHAT FUNCTIONALITY OBJECT THING
 			
 			while( ! Thread.interrupted() )
 			{
 				//System.out.println(in.next);	
-				out.println(scanKeyboard.nextLine());
+				//out.println(scanKeyboard.nextLine());    
 				out.flush();
 			}
 		}

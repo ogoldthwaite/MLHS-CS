@@ -2,15 +2,16 @@ package simpleServer;
 
 import java.util.Scanner;
 
-public class SendChat implements Runnable
+public class ReceiveChat implements Runnable
 {
 	private Thread t;
 	private Scanner hostKey;
 	private String nickName;
 	
-	public SendChat(Scanner scan)
+	public ReceiveChat(Scanner scan)
 	{
 		hostKey = scan;	
+		nickName = "";
 		t = new Thread(this);
 		t.start();	
 	}
@@ -44,8 +45,6 @@ public class SendChat implements Runnable
 	{
 		t.interrupt();
 	}
-	
-	
 	
 	
 }
