@@ -1,16 +1,19 @@
 package simpleServer;
 
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class SendChat implements Runnable
 {
 	private Thread t;
-	private Scanner hostKey;
+	private PrintWriter write;
+	private Scanner scan;
 	private String nickName;
 	
-	public SendChat(Scanner scan)
+	public SendChat(PrintWriter out, Scanner scantastic)
 	{
-		hostKey = scan;	
+		write = out;
+		scan = scantastic;
 		t = new Thread(this);
 		t.start();	
 	}
@@ -19,25 +22,14 @@ public class SendChat implements Runnable
 	{
 		while( ! Thread.interrupted())
 		{
-		
-		String text = hostKey.next();
-		
-//		if(text.startsWith("/nick"))
-//		{
-//			  nickName = text.substring("/nick ".length());
-//			
-//			  nickName = "bob";
-//		}
-		
-		
-		
-		if(nickName.equals(""))
-			System.out.println(text);
-		else	
-		    System.out.println(nickName + ": " + text);
-		
+			String text = scan.next();
+					
+			write.println(text);
+			write.flush();
+			
+			//System.out.println(text);
 		}
-		
+	
 	}
 	
 	public void annihilate()

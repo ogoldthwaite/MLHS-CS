@@ -64,6 +64,17 @@ public class SimpleServer implements Runnable
 		}
 	}
 	
+	private void sendAll(List<SimpleClientHandler> cList)
+	{
+		for(int i = 0; i < cList.size(); i++)
+		{
+			
+			
+		}
+	}
+	
+	
+	
 	private void closeAll()
 	{
 		for(SimpleClientHandler sch : clients)
