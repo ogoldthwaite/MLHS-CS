@@ -32,7 +32,7 @@ public class SimpleServer implements Runnable
 				{
         				Socket s = ss.accept();
         				System.out.println("Client connected");
-        				clients.add(new SimpleClientHandler(s));
+        				clients.add(new SimpleClientHandler(s, this));
 				}
 				catch(SocketTimeoutException e)
 				{
@@ -64,12 +64,13 @@ public class SimpleServer implements Runnable
 		}
 	}
 	
-	private void sendAll(List<SimpleClientHandler> cList)
+	
+	public void sendAll(String msg, SimpleClientHandler noSend)
 	{
-		for(int i = 0; i < cList.size(); i++)
+		for(int i = 0; i < clients.size(); i++)
 		{
-			
-			
+			if(!(clients.get(i).equals(noSend)))	
+				clients.get(i).send(msg);
 		}
 	}
 	
