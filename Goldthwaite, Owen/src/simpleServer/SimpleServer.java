@@ -25,14 +25,17 @@ public class SimpleServer implements Runnable
 			ss = new ServerSocket(8888);
 			ss.setSoTimeout(1000);
 			System.out.println("Waiting for connections");
+			int count = 1;
 			
 			while( ! Thread.interrupted() )
 			{
 				try
 				{
-        				Socket s = ss.accept();
+						Socket s = ss.accept();
         				System.out.println("Client connected");
         				clients.add(new SimpleClientHandler(s, this));
+        				clients.get(count - 1).setNick("Guest" + count);
+        				count++;
 				}
 				catch(SocketTimeoutException e)
 				{
@@ -74,7 +77,31 @@ public class SimpleServer implements Runnable
 		}
 	}
 	
+	public ArrayList<String> List()
+	{
+		ArrayList<String> nList = new ArrayList<String>();
+		
+		for(int i = 0; i<clients.size(); i++)
+			nList.add(clients.get(i).getNick());
+		
+		return nList;
+	}
 	
+	public void disconnect(SimpleClientHandler client)
+	{
+		try 
+		{
+			client.getSocket().close();
+			clients.remove(client);
+			client.annihilate();
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 	private void closeAll()
 	{

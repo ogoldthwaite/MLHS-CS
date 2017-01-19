@@ -9,6 +9,7 @@ public class SimpleClientHandler implements Runnable
 	private Thread t;
 	private Socket connectionToClient;
 	private SimpleServer parentServer;
+	private String nickName;
 	
 	public SimpleClientHandler(Socket clientConnection, SimpleServer dankServer)
 	{
@@ -27,6 +28,7 @@ public class SimpleClientHandler implements Runnable
 						
 			while( ! Thread.interrupted() )
 			{
+				//if(in.nextLine()) add something to check for a space
 				respond(in.nextLine());	
 			}
 		}
@@ -65,20 +67,28 @@ public class SimpleClientHandler implements Runnable
 		}
 		else if(line.startsWith("TELL"))
 		{
-			parentServer.sendAll(postProt, this);
+			parentServer.sendAll(nickName + ":" +postProt, this);
 		}
 		
 		else if(line.startsWith("NICK"))
 		{
-			
+			setNick(postProt);
 		}
 		else if(line.startsWith("DISC"))
 		{
-			
+			parentServer.disconnect(this);
+			System.out.println("it worked");
 		}
 		else if(line.startsWith("LIST"))
 		{
+			ArrayList<String> nickList = parentServer.List();
+			String toSend = "[";
 			
+			for(int i = 0; i < nickList.size() - 1; i++)
+				toSend += nickList.get(i)+", ";
+			
+			toSend += nickList.get(nickList.size() - 1) + "]";
+			send(toSend);
 		}
 		else
 		{
@@ -87,6 +97,20 @@ public class SimpleClientHandler implements Runnable
 		
 	}
 	
+	public void setNick(String nick)
+	{
+		nickName = nick;
+	}
+
+	public String getNick()
+	{
+		return this.nickName;
+	}
+	
+	public Socket getSocket()
+	{
+		return connectionToClient;
+	}
 	
 	public void annihilate()
 	{
