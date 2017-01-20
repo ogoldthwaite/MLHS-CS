@@ -87,6 +87,19 @@ public class SimpleServer implements Runnable
 		return nList;
 	}
 	
+	public void whisper(String msg, String nickName)
+	{
+		int count = 0;
+		while(! clients.get(count).getNick().equals(nickName) && count < clients.size())
+		{
+			count++;
+			System.out.println("nickname " + nickName);
+			System.out.println("getNick " + clients.get(count).getNick());
+		}
+
+		clients.get(count).send(msg);
+	}
+	
 	public void disconnect(SimpleClientHandler client)
 	{
 		try 
@@ -97,7 +110,6 @@ public class SimpleServer implements Runnable
 		} 
 		catch (IOException e) 
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
