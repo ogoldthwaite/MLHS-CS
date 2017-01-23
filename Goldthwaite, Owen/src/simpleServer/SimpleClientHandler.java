@@ -68,20 +68,16 @@ public class SimpleClientHandler implements Runnable
 				int space = postProt.indexOf(" ");
 				nickName = postProt.substring(0, space);
 				msg = postProt.substring(space + 1);
+	
+				int numCode = parentServer.whisper(this.nickName +": " + msg, nickName);
 				
-				
-				
-				//TELL WHO SENT MSG AND IF NICK DOES NOT EXIST GIVE ERROR
-				
-				
-				
-				
-				parentServer.whisper(msg, nickName);
+				if(numCode == 600)
+					send("Dude your PM didn't work bro!! Choose an existing nickname!!");
 				
 			}
 			else if(line.startsWith("TELL"))
 			{
-				parentServer.sendAll(nickName + ":" +postProt, this);
+				parentServer.sendAll("TLL " + nickName + ":" +postProt, this);
 			}
 			
 			else if(line.startsWith("NICK"))
@@ -91,7 +87,7 @@ public class SimpleClientHandler implements Runnable
 			else if(line.startsWith("DISC"))
 			{
 				parentServer.disconnect(this);
-				parentServer.sendAll(this.getNick() + " Disconected", this);
+				parentServer.sendAll("DSC " + this.getNick(), this);
 				System.out.println("Client Disconnected");
 			}
 			else if(line.startsWith("LIST"))
@@ -107,14 +103,23 @@ public class SimpleClientHandler implements Runnable
 			}
 		else
 		{
-			send("Dude that's not a command bro");
+			send("666");
 		}
 		
 	}
 	
 	public void setNick(String nick)
 	{
-		nickName = nick;
+		int numCode = parentServer.checkNick(nick);
+		
+		
+		if(numCode != 702)
+			System.out.println(numCode);
+		else if(numCode == 702)
+		{
+			send("NIC " +this.getNick() +" " + nick);
+			nickName = nick;
+		}
 	}
 
 	public String getNick()

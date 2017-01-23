@@ -68,13 +68,15 @@ public class SimpleServer implements Runnable
 	}
 	
 	
-	public void sendAll(String msg, SimpleClientHandler noSend)
+	public int sendAll(String msg, SimpleClientHandler noSend)
 	{
 		for(int i = 0; i < clients.size(); i++)
 		{
 			if(!(clients.get(i).equals(noSend)))	
 				clients.get(i).send(msg);
 		}
+		
+		return 701;
 	}
 	
 	public ArrayList<String> List()
@@ -87,17 +89,39 @@ public class SimpleServer implements Runnable
 		return nList;
 	}
 	
-	public void whisper(String msg, String nickName)
+	public int whisper(String msg, String nickName)
 	{
 		int count = 0;
-		while(! clients.get(count).getNick().equals(nickName) && count < clients.size())
-		{
-			count++;
-			System.out.println("nickname " + nickName);
-			System.out.println("getNick " + clients.get(count).getNick());
-		}
 
-		clients.get(count).send(msg);
+		try
+		{
+
+			while(! clients.get(count).getNick().equals(nickName) && count < clients.size())
+			{
+				count++;
+			}
+			clients.get(count).send(msg);
+			return 700;
+
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+				System.out.println("600");
+				return 600;
+		}
+	}
+	
+	public int checkNick(String nick)
+	{
+		for(int i = 0; i<clients.size(); i++)
+			if(nick.equals(clients.get(i).getNick()))
+				return 602;
+		
+		if(nick.contains(" "))
+			return 502;
+		
+		return 702;
+		
 	}
 	
 	public void disconnect(SimpleClientHandler client)
