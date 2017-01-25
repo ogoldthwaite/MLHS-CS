@@ -35,6 +35,7 @@ public class SimpleServer implements Runnable
         				System.out.println("Client connected");
         				clients.add(new SimpleClientHandler(s, this));
         				clients.get(count - 1).setNick("Guest" + count);
+        				sendAll("CON " +clients.get(count - 1).getNick());
         				count++;
 				}
 				catch(SocketTimeoutException e)
@@ -42,6 +43,8 @@ public class SimpleServer implements Runnable
 					
 				}
 			}
+			
+			System.out.println("LOL WHAT");
 			
 		}
 		catch (IOException e)
@@ -68,11 +71,21 @@ public class SimpleServer implements Runnable
 	}
 	
 	
-	public int sendAll(String msg, SimpleClientHandler noSend)
+//	public int sendAll(String msg, SimpleClientHandler noSend)
+//	{
+//		for(int i = 0; i < clients.size(); i++)
+//		{
+//			if(!(clients.get(i).equals(noSend)))	
+//				clients.get(i).send(msg);
+//		}
+//		
+//		return 701;
+//	}
+	
+	public int sendAll(String msg)
 	{
 		for(int i = 0; i < clients.size(); i++)
 		{
-			if(!(clients.get(i).equals(noSend)))	
 				clients.get(i).send(msg);
 		}
 		
@@ -100,7 +113,7 @@ public class SimpleServer implements Runnable
 			{
 				count++;
 			}
-			clients.get(count).send(msg);
+			clients.get(count).send("MSG " + msg);
 			return 700;
 
 		}
@@ -124,17 +137,18 @@ public class SimpleServer implements Runnable
 		
 	}
 	
-	public void disconnect(SimpleClientHandler client)
+	public int disconnect(SimpleClientHandler client)
 	{
 		try 
 		{
 			client.getSocket().close();
 			clients.remove(client);
-			client.annihilate();
+			return 703;
 		} 
 		catch (IOException e) 
 		{
 			e.printStackTrace();
+			return 603;
 		}
 		
 	}

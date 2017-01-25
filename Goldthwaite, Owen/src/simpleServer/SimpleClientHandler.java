@@ -6,7 +6,7 @@ import java.util.*;
 
 public class SimpleClientHandler implements Runnable 
 {
-	private Thread t;
+	private Thread ta;
 	private Socket connectionToClient;
 	private SimpleServer parentServer;
 	private String nickName;
@@ -15,8 +15,8 @@ public class SimpleClientHandler implements Runnable
 	{
 		connectionToClient = clientConnection;
 		parentServer = dankServer;
-		t = new Thread(this);
-		t.start();
+		ta = new Thread(this);
+		ta.start();
 	}
 	
 	public void run()
@@ -71,13 +71,13 @@ public class SimpleClientHandler implements Runnable
 	
 				int numCode = parentServer.whisper(this.nickName +": " + msg, nickName);
 				
-				if(numCode == 600)
-					send("Dude your PM didn't work bro!! Choose an existing nickname!!");
+				send(numCode+"");
 				
 			}
 			else if(line.startsWith("TELL"))
 			{
-				parentServer.sendAll("TLL " + nickName + ":" +postProt, this);
+				int numCode = parentServer.sendAll("TLL " + nickName + ":" +postProt);
+				send(numCode+"");
 			}
 			
 			else if(line.startsWith("NICK"))
@@ -86,8 +86,10 @@ public class SimpleClientHandler implements Runnable
 			}
 			else if(line.startsWith("DISC"))
 			{
-				parentServer.disconnect(this);
-				parentServer.sendAll("DSC " + this.getNick(), this);
+				send("703");
+				int numCode = parentServer.disconnect(this);
+				annihilate();
+				parentServer.sendAll("DSC " + this.getNick());
 				System.out.println("Client Disconnected");
 			}
 			else if(line.startsWith("LIST"))
@@ -100,6 +102,8 @@ public class SimpleClientHandler implements Runnable
 				
 				toSend += nickList.get(nickList.size() - 1) + "]";
 				send(toSend);
+				
+				send("704");
 			}
 		else
 		{
@@ -112,14 +116,15 @@ public class SimpleClientHandler implements Runnable
 	{
 		int numCode = parentServer.checkNick(nick);
 		
-		
 		if(numCode != 702)
 			System.out.println(numCode);
 		else if(numCode == 702)
 		{
-			send("NIC " +this.getNick() +" " + nick);
+			parentServer.sendAll("NIC " +this.getNick() +" " + nick);
 			nickName = nick;
 		}
+		
+		send(numCode+"");
 	}
 
 	public String getNick()
@@ -134,6 +139,6 @@ public class SimpleClientHandler implements Runnable
 	
 	public void annihilate()
 	{
-		t.interrupt();
+		ta.interrupt();
 	}
 }
