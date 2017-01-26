@@ -8,10 +8,12 @@ public class SimpleServer implements Runnable
 {
 	private Thread t;
 	private List<SimpleClientHandler> clients;
+	private int count;
 
 	public SimpleServer()
 	{
 		clients = new LinkedList<SimpleClientHandler>();
+		count = 1;
 		t = new Thread(this);
 		t.start();
 	}
@@ -25,18 +27,21 @@ public class SimpleServer implements Runnable
 			ss = new ServerSocket(8888);
 			ss.setSoTimeout(1000);
 			System.out.println("Waiting for connections");
-			int count = 1;
+			int counttwo = 1;
 			
 			while( ! Thread.interrupted() )
 			{
 				try
 				{
 						Socket s = ss.accept();
-        				System.out.println("Client connected");
+        				System.out.println("Client connected");	
+        				
         				clients.add(new SimpleClientHandler(s, this));
-        				clients.get(count - 1).setNick("Guest" + count);
+        				
+        				clients.get(count - 1).setNick("Guest" + counttwo);
         				sendAll("CON " +clients.get(count - 1).getNick());
         				count++;
+        				counttwo++;
 				}
 				catch(SocketTimeoutException e)
 				{
@@ -137,12 +142,35 @@ public class SimpleServer implements Runnable
 		
 	}
 	
+	public int kick(String nick)
+	{
+		try
+		{
+			for(int i = 0; i <clients.size(); i++)
+			{
+				if(nick.equals(clients.get(i).getNick()))
+				{
+					disconnect(clients.get(i));
+					clients.get(i).annihilate();
+				}
+			}
+			return 420;
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			sendAll(nick +" could not be bodied!");
+			return 1337;
+		}
+	}
+	
 	public int disconnect(SimpleClientHandler client)
 	{
 		try 
 		{
 			client.getSocket().close();
 			clients.remove(client);
+			count--;
+			System.out.println("Client Disconnected!");
 			return 703;
 		} 
 		catch (IOException e) 

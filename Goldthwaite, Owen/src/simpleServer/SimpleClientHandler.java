@@ -28,13 +28,12 @@ public class SimpleClientHandler implements Runnable
 						
 			while( ! Thread.interrupted() )
 			{
-				//if(in.nextLine()) add something to check for a space
 				respond(in.nextLine());	
 			}
 		}
 		catch (IOException e)
 		{
-			
+			send("Something went wrong!");
 		}
 
 	}
@@ -57,61 +56,65 @@ public class SimpleClientHandler implements Runnable
 	private void respond(String line)
 	{
 		String postProt = "";
-		
+
 		if(line.length() > 5)
-		   postProt = line.substring(5);
-		
-			if(line.startsWith("SEND"))
-			{
-				String nickName = "";
-				String msg = "";			
-				int space = postProt.indexOf(" ");
-				nickName = postProt.substring(0, space);
-				msg = postProt.substring(space + 1);
-	
-				int numCode = parentServer.whisper(this.nickName +": " + msg, nickName);
-				
-				send(numCode+"");
-				
-			}
-			else if(line.startsWith("TELL"))
-			{
-				int numCode = parentServer.sendAll("TLL " + nickName + ":" +postProt);
-				send(numCode+"");
-			}
-			
-			else if(line.startsWith("NICK"))
-			{
-				setNick(postProt);
-			}
-			else if(line.startsWith("DISC"))
-			{
-				send("703");
-				int numCode = parentServer.disconnect(this);
-				annihilate();
-				parentServer.sendAll("DSC " + this.getNick());
-				System.out.println("Client Disconnected");
-			}
-			else if(line.startsWith("LIST"))
-			{
-				ArrayList<String> nickList = parentServer.List();
-				String toSend = "[";
-				
-				for(int i = 0; i < nickList.size() - 1; i++)
-					toSend += nickList.get(i)+", ";
-				
-				toSend += nickList.get(nickList.size() - 1) + "]";
-				send(toSend);
-				
-				send("704");
-			}
+			postProt = line.substring(5);
+
+		if(line.startsWith("SEND"))
+		{
+			String nickName = "";
+			String msg = "";			
+			int space = postProt.indexOf(" ");
+			nickName = postProt.substring(0, space);
+			msg = postProt.substring(space + 1);
+
+			int numCode = parentServer.whisper(this.nickName +": " + msg, nickName);
+
+			send(numCode+"");
+
+		}
+		else if(line.startsWith("TELL"))
+		{
+			int numCode = parentServer.sendAll("TLL " + nickName + ": " +postProt);
+			send(numCode+"");
+		}
+		else if(line.startsWith("NICK"))
+		{
+			setNick(postProt);
+		}
+		else if(line.startsWith("DISC"))
+		{
+			send("703");
+			parentServer.sendAll("DSC " + this.getNick());
+			int numCode = parentServer.disconnect(this);
+			annihilate();
+		}
+		else if(line.startsWith("LIST"))
+		{
+			ArrayList<String> nickList = parentServer.List();
+			String toSend = "[";
+
+			for(int i = 0; i < nickList.size() - 1; i++)
+				toSend += nickList.get(i)+", ";
+
+			toSend += nickList.get(nickList.size() - 1) + "]";
+			send(toSend);
+
+			send("704");
+		}
+		else if(line.startsWith("BODY"))
+		{
+			int numCode = parentServer.kick(postProt);
+			System.out.println(numCode);
+
+		}
 		else
 		{
 			send("666");
 		}
-		
+
 	}
-	
+
 	public void setNick(String nick)
 	{
 		int numCode = parentServer.checkNick(nick);
