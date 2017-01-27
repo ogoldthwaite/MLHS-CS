@@ -38,7 +38,7 @@ public class SimpleServer implements Runnable
         				
         				clients.add(new SimpleClientHandler(s, this));
         				
-        				clients.get(count - 1).setNick("Guest" + counttwo);
+        				clients.get(count - 1).setNick("Guest" + counttwo, true);
         				sendAll("CON " +clients.get(count - 1).getNick());
         				count++;
         				counttwo++;
@@ -142,26 +142,26 @@ public class SimpleServer implements Runnable
 		
 	}
 	
-	public int kick(String nick)
-	{
-		try
-		{
-			for(int i = 0; i <clients.size(); i++)
-			{
-				if(nick.equals(clients.get(i).getNick()))
-				{
-					disconnect(clients.get(i));
-					clients.get(i).annihilate();
-				}
-			}
-			return 420;
-		}
-		catch(IndexOutOfBoundsException e)
-		{
-			sendAll(nick +" could not be bodied!");
-			return 1337;
-		}
-	}
+//	public int body(String nick)
+//	{
+//		try
+//		{
+//			for(int i = 0; i <clients.size(); i++)
+//			{
+//				if(nick.equals(clients.get(i).getNick()))
+//				{
+//					while(1 == 1)
+//						clients.get(i).send("Bod");
+//				}
+//			}
+//			return 420;
+//		}
+//		catch(IndexOutOfBoundsException e)
+//		{
+//			sendAll(nick +" could not be bodied!");
+//			return 1337;
+//		}
+//	}
 	
 	public int disconnect(SimpleClientHandler client)
 	{

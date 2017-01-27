@@ -60,27 +60,33 @@ public class SimpleClientHandler implements Runnable
 		if(line.length() > 5)
 			postProt = line.substring(5);
 
-		if(line.startsWith("SEND"))
+		if(line.startsWith("SEND") && postProt.length() >= 1 && (postProt.contains(" ")))
 		{
 			String nickName = "";
 			String msg = "";			
+			
 			int space = postProt.indexOf(" ");
+			
 			nickName = postProt.substring(0, space);
 			msg = postProt.substring(space + 1);
-
-			int numCode = parentServer.whisper(this.nickName +": " + msg, nickName);
+			
+			int numCode = 666;
+			
+			if(msg.length() > 0)
+				 numCode = parentServer.whisper(this.nickName +": " + msg, nickName);
 
 			send(numCode+"");
+		
 
 		}
-		else if(line.startsWith("TELL"))
+		else if(line.startsWith("TELL") && postProt.length() >= 1)
 		{
 			int numCode = parentServer.sendAll("TLL " + nickName + ": " +postProt);
 			send(numCode+"");
 		}
-		else if(line.startsWith("NICK"))
+		else if(line.startsWith("NICK") && postProt.length() >= 1)
 		{
-			setNick(postProt);
+			setNick(postProt, false);
 		}
 		else if(line.startsWith("DISC"))
 		{
@@ -102,10 +108,13 @@ public class SimpleClientHandler implements Runnable
 
 			send("704");
 		}
-		else if(line.startsWith("BODY"))
+		else if(line.startsWith("BODY") && postProt.length() >= 1)
 		{
-			int numCode = parentServer.kick(postProt);
-			System.out.println(numCode);
+			
+			while(1 == 1)
+			{
+			parentServer.whisper("Bod", postProt);
+			}
 
 		}
 		else
@@ -115,19 +124,26 @@ public class SimpleClientHandler implements Runnable
 
 	}
 
-	public void setNick(String nick)
+	public void setNick(String nick, boolean first)
 	{
 		int numCode = parentServer.checkNick(nick);
-		
-		if(numCode != 702)
-			System.out.println(numCode);
-		else if(numCode == 702)
+
+
+		if(first == false)
 		{
-			parentServer.sendAll("NIC " +this.getNick() +" " + nick);
-			nickName = nick;
+			if(numCode != 702)
+				System.out.println(numCode);
+			else if(numCode == 702)
+			{
+				parentServer.sendAll("NIC " +this.getNick() +" " + nick);
+				nickName = nick;
+			}
+
+			send(numCode+"");
 		}
-		
-		send(numCode+"");
+		else
+			nickName = nick;
+
 	}
 
 	public String getNick()
