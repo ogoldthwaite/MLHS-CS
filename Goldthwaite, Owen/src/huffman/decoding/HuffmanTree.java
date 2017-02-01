@@ -9,22 +9,25 @@ public class HuffmanTree
 		String msg = "";
 		TreeNode node = root;
 		int i = 0;
+		
 
 		for(int k = 0; k < encodedMessage.length(); k++)
 		{
 
-			while(node != null)
+			while(node.left != null && node.right != null && i < encodedMessage.length())
 			{
-				if(encodedMessage.substring(i, i+1).equals(0))
+				if(encodedMessage.substring(i, i+1).equals("0"))
 					node = node.left;
 
-				if(encodedMessage.substring(i, i+1).equals(1))
+				if(encodedMessage.substring(i, i+1).equals("1"))
 					node = node.right;
 
 				i++;
 			}
-
-			msg += node.letter;
+			
+			if(node.letter != null)
+				msg += node.letter;
+			
 			node = root;
 		}
 
@@ -43,10 +46,14 @@ public class HuffmanTree
 
 		if(encoding.length() == 0)
 		{
-			node.letter = letter+"";
-			return node;
+			return new TreeNode(letter + "");
+//			node.letter = letter+"";
+//			return node;
 		}
 
+		if(node == null)
+			node = new TreeNode(null);
+		
 		if(encoding.substring(0,1).equals("0"))
 			node.left = insert(letter, encoding.substring(1), node.left);
 

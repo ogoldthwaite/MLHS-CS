@@ -11,16 +11,14 @@ public class testTree {
 		HuffmanTree oak = new HuffmanTree();
 		Scanner scan = new Scanner(new File("files/scheme.txt"));
 		Scanner cool = new Scanner(new File("files/encoded.txt"));
-		String code = scan.nextLine();
+		String code = cool.nextLine();
+		String scheme = scan.nextLine();
 		
-		while(scan.hasNext())
+		while(scan.hasNextLine())
 		{
-			String scheme = scan.nextLine();
-			System.out.println(scheme);
 			oak.insert(scheme.charAt(0), scheme.substring(1));
+			scheme = scan.nextLine();
 		}
-		
-		System.out.println(code);
 		
 		System.out.println(oak.decodeMessage(code));
 
