@@ -9,8 +9,8 @@ public class testTree {
 	public static void main(String[] args) throws FileNotFoundException 
 	{
 		HuffmanTree oak = new HuffmanTree();
-		Scanner scan = new Scanner(new File("files/scheme.txt"));
-		Scanner cool = new Scanner(new File("files/encoded.txt"));
+		Scanner scan = new Scanner(new File("files/dankScheme.txt"));
+		Scanner cool = new Scanner(new File("files/message.txt"));
 		String code = cool.nextLine();
 		String scheme = scan.nextLine();
 		

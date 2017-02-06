@@ -24,22 +24,23 @@ public class HuffmanTree
     	
     }
     
-    public String encodeLetter(char letter)
+    public String encodeLetter(char letter, Map<Character, String> scheme)
     {
-    	String returnString = encodeLetter(letter, root);
+    	String returnString = scheme.get(letter);
     	
         return returnString;
     }
     
-    private String encodeLetter(char letter, FrequencyTreeNode node)
-    {
-        
-    	
-    	
-    	
-    }
-    
+//    private String encodeLetter(char letter, FrequencyTreeNode node)
+//    {
+//        
+//    	
+//    	
+//    	
+//    }
+//    
     // returns a map of characters to encodings
+    
     public Map<Character, String> encodingScheme()
     {
         Map<Character, String> scheme = new HashMap<Character, String>();
