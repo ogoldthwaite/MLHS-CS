@@ -1,9 +1,9 @@
 package twentyQuestions;
 
 
-public class TreeNode 
+public class TreeNode<String>
 {
-	public TreeNode left, right;
+	public TreeNode<String> left, right;
 	public String value;
 
     public TreeNode(String stuff)
