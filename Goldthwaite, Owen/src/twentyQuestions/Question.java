@@ -29,6 +29,31 @@ public class Question
 		root.right.value = rightValue;
 
 	}
+
+	public Question() throws FileNotFoundException
+	{
+		Scanner scan = new Scanner(new File("files/questionTree.txt"));
+		
+		root = makeTree(root, scan);
+	}
+	
+	private TreeNode<String> makeTree(TreeNode<String> node, Scanner scan)
+	{
+		if(node == null)
+		{
+			node = new TreeNode<String>();
+			node.value = scan.nextLine();
+		}
+		
+		node.left = makeTree(node.left, scan);
+		
+		node.right = makeTree(node.right, scan);
+		
+		
+		return null;
+	}
+	
+	
 	
 	public void solve() throws FileNotFoundException
 	{
@@ -97,7 +122,7 @@ public class Question
 		PrintWriter out = new PrintWriter(saveFile);
 		List<String> tree = preOrder();
 		out.println(tree);		
-		out.flush();
+		out.close();
 		
 	}
 	
@@ -111,6 +136,9 @@ public class Question
     private void preOrder(TreeNode<String> node, List<String> elementsPreOrder)
     {
     	elementsPreOrder.add(node.value);
+    	
+    	if(node == null)
+    		elementsPreOrder.add("-");
     	
     	if(node.left != null)
     		preOrder(node.left, elementsPreOrder);
