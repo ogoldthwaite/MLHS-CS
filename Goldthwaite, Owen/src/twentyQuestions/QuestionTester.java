@@ -9,9 +9,6 @@ public class QuestionTester {
 		Question game = new Question("Human", "Bob", "Fish");
 		
 		game.solve();
-		
-		
-
 	}
 
 }

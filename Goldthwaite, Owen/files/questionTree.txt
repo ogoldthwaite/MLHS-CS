@@ -1,1 +1,15 @@
-[Human, Bob, Fish]
+Human
+hair
+cat
+-
+-
+Bob
+-
+-
+legs
+dog
+-
+-
+Fish
+-
+-

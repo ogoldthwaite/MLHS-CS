@@ -1,5 +1,6 @@
 package twentyQuestions;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -33,11 +34,12 @@ public class Question
 	public Question() throws FileNotFoundException
 	{
 		Scanner scan = new Scanner(new File("files/questionTree.txt"));
+		 TreeNode<String> prevNode = new TreeNode<String>()
 		
-		root = makeTree(root, scan);
+		root = makeTree(root, scan, prevNode);
 	}
 	
-	private TreeNode<String> makeTree(TreeNode<String> node, Scanner scan)
+	private TreeNode<String> makeTree(TreeNode<String> node, Scanner scan, TreeNode<String> prevNode)
 	{
 		if(node == null)
 		{
@@ -45,12 +47,15 @@ public class Question
 			node.value = scan.nextLine();
 		}
 		
-		node.left = makeTree(node.left, scan);
+		if((node.right == null || node.left == null)
+				//PREV NODE PROBS MUST BE CHANGED
+				
 		
-		node.right = makeTree(node.right, scan);
+			node.left = makeTree(node.left, scan, prevNode);
 		
-		
-		return null;
+			node.right = makeTree(node.right, scan, prevNode);
+			
+		return node;
 	}
 	
 	
@@ -121,9 +126,12 @@ public class Question
 		File saveFile = new File("files/questionTree.txt");
 		PrintWriter out = new PrintWriter(saveFile);
 		List<String> tree = preOrder();
-		out.println(tree);		
-		out.close();
+		Iterator<String> itr = tree.iterator();
 		
+		for(int i = 0; i < tree.size(); i++)
+			out.println(itr.next());
+	
+		out.close();	
 	}
 	
 	public List<String> preOrder()
@@ -137,14 +145,19 @@ public class Question
     {
     	elementsPreOrder.add(node.value);
     	
-    	if(node == null)
-    		elementsPreOrder.add("-");
+//    	if(node == null)
+//    		elementsPreOrder.add("-");
     	
     	if(node.left != null)
     		preOrder(node.left, elementsPreOrder);
+    	else
+    		elementsPreOrder.add("-");
     	
     	if(node.right != null)
     		preOrder(node.right, elementsPreOrder);
+    	else
+    		elementsPreOrder.add("-");
+    	
     }
 
 	private void waitSec()
