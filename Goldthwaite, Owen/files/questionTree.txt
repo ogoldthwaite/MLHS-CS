@@ -1,15 +1,27 @@
-Human
-hair
-cat
--
--
-Bob
--
--
-legs
+Alive
+breathes air
 dog
 -
 -
+has a shell
+oyster
+-
+-
 Fish
+-
+-
+legs
+is a seat
+bench
+-
+-
+table
+-
+-
+is cardboard
+box
+-
+-
+Computer
 -
 -
