@@ -32,8 +32,7 @@ public class MessageFrequency
 		PriorityQueue<FrequencyTreeNode> qq = new PriorityQueue<FrequencyTreeNode>();
 		
 		for(int i = 0; i < msg.length(); i++)
-		{
-			
+		{	
 			FrequencyTreeNode node = new FrequencyTreeNode(msg.charAt(i), map.get(msg.charAt(i)+""));
 			qq.add(node);
 		}
