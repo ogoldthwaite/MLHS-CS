@@ -17,14 +17,7 @@ public class Tester {
 
 		Decode dankCode = new Decode(code);
 		
-		System.out.println(dankCode.getFreqMap());
-		
-//		PriorityQueue<FrequencyNode> qq = new PriorityQueue<FrequencyNode>();
-		
-//		qq = dankCode.makeQueue();
-		
-//		for(int i = qq.size(); i > 0; i--)
-//			System.out.println(qq.peek().letter + " = " +qq.poll().frequency);
+		System.out.println(dankCode.makeFreqMap());
 		
 		scan.close();
 	}
