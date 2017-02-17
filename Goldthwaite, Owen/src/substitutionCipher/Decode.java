@@ -1,11 +1,17 @@
 package substitutionCipher;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
 
 import huffman.encoding.FrequencyTreeNode;
 
@@ -38,6 +44,7 @@ public class Decode
 	{
 		createMap(code);
 		Map<String, Double> dMap = new HashMap<String, Double>();
+		List<MapNode> freqs = new LinkedList<MapNode>();
 		Set temp =  map.keySet();
 		Iterator itr = temp.iterator();
 		
@@ -45,16 +52,22 @@ public class Decode
 		{
 			String key = (String) itr.next();
 			dMap.put(key, (map.get(key)/msgSize));
+			freqs.add(new MapNode(key+"", dMap.get(key)));	
+			System.out.println(freqs.get(i).toString());
 		}
+	//	Collections.sort(freqs);
+	//	System.out.println(freqs);	
 		
 		return dMap;
 	}
-	 //Remove spaces
 	
-	public Map<String, Double> getCountMap()
+	public String editMsg()
 	{
-		return map;
+		return code;
+		
+		
 	}
 	
+
 	
 }
