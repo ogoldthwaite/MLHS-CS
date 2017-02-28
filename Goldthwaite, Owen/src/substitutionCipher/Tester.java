@@ -15,7 +15,7 @@ public class Tester {
 		while(scan.hasNext())
 			code += scan.nextLine();
 
-		Decode dankCode = new Decode(code);
+		Decode dankCode = new Decode(code.toLowerCase());
 		
 		System.out.println(dankCode.makeFreqMap());
 		

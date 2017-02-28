@@ -11,9 +11,14 @@ public class MapNode implements Comparable<MapNode>
         this.frequency = frequency;
     }
 
-	public double compareTo(MapNode other)  //Doesnt work with a double?
+	public int compareTo(MapNode other)  //Doesnt work with a double?
     {
-        return frequency - other.frequency;
+        if (frequency > other.frequency)
+        	return -1;
+        else if(frequency < other.frequency)
+        	return 1;
+        else
+        	return 0;
     }
 	
 	public String toString()
