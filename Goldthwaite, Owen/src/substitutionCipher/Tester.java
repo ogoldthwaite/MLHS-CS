@@ -19,6 +19,8 @@ public class Tester {
 		
 		System.out.println(dankCode.makeFreqMap());
 		
+		dankCode.editMsg();
+		
 		scan.close();
 	}
 
