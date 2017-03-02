@@ -22,27 +22,30 @@ public class Decode
 		this.msgSize = code.length();
 		this.keyMap = new HashMap<String, String>();
 		this.map = new HashMap<String, Double>();
+		makeKeyMap();
 	}
 
 	private void createMap(String msg)
 	{
 		for(int i = 0; i < msg.length(); i++)
 		{
-			String letter = msg.charAt(i)+"";
-			if(map.containsKey(letter))
-				map.put(letter, map.get(letter) + 1.0);
-			else
-				map.put(letter, 1.0);
+			if(isLetter(msg.charAt(i))) //Is letter?
+			{
+				String letter = msg.charAt(i)+"";
+				if(map.containsKey(letter))
+					map.put(letter, map.get(letter) + 1.0);
+				else
+					map.put(letter, 1.0);
+			}
 
 		}	
 	}
 
 	public List<MapNode> makeFreqMap()
-	{
+	{	
 		createMap(code);
 		Map<String, Double> dMap = new HashMap<String, Double>();
 		List<MapNode> freqs = new LinkedList<MapNode>();
-		Set<MapNode> freqSet = new TreeSet<MapNode>();
 		Set temp =  map.keySet();
 		Iterator itr = temp.iterator();
 
@@ -61,39 +64,35 @@ public class Decode
 	{
 		Scanner scan = new Scanner(System.in);
 		boolean again = true;
-		File saveFile = new File("files/brokenCode.txt");
-		PrintWriter out = new PrintWriter(saveFile);
 
 		while(again)
 		{
 
 			System.out.println("Enter letter you want to change followed by the letter you want to swap it with!");
 
-			code = swapLetter(scan.nextLine().charAt(0) ,scan.nextLine().toUpperCase().charAt(0)); //Change all these things to chars in the swapLetter method
+			code = swapLetter(scan.nextLine().charAt(0)+"" , scan.nextLine().toUpperCase().charAt(0)+""); //Change all these things to chars in the swapLetter method
 
 			System.out.println(code);
-			out.print(code);
-			out.flush();
+			saveToFile();
 			again = yesNo();
 		}
-		
-		
-		return code;	
+		scan.close();
+		return code;
 	}
 
-	private String swapLetter(char toSwap, char swapLet)
+	private String swapLetter(String toSwap, String swapLet)
 	{
 		char[] codeArray = new char[code.length()];
 		String newCode = "";
-		keyMap.put(swapLet+"", toSwap+"");
+		keyMap.put(toSwap+"",swapLet.toLowerCase());
 
 		for(int k = 0; k < code.length(); k++)
 			codeArray[k] = code.charAt(k);
 
 		for(int i = 0; i < codeArray.length; i++)
 		{
-			if(codeArray[i] == toSwap)
-				codeArray[i] = swapLet;
+			if(codeArray[i] == toSwap.charAt(0))
+				codeArray[i] = swapLet.charAt(0);
 
 			newCode += codeArray[i];
 		}
@@ -101,7 +100,40 @@ public class Decode
 		System.out.println(keyMap);
 		return newCode;
 	}
+	
+	public void loadMostFreq()
+	{
+		String mostFreqLets = "EARIOTNSLCUDPMHGBFYWKVXZJC";
+		
+		
+		
+		
+	}
 
+	private void saveToFile() throws FileNotFoundException 
+	{
+		File saveFile = new File("files/brokenCode.txt");
+		PrintWriter out = new PrintWriter(saveFile);
+		String toPrint = "";
+		int count = 0;
+		
+		for(int i = 0; i < code.length(); i++)
+		{
+			toPrint += code.charAt(i);
+			
+			if(toPrint.length() >= 60)
+			{
+				out.println(toPrint);
+				out.flush();
+				toPrint = "";
+			}
+		}
+
+		out.print(toPrint);
+		out.flush();
+		
+	}
+	
 	private boolean yesNo()
 	{
 		Scanner scan = new Scanner(System.in);
@@ -115,5 +147,12 @@ public class Decode
 			return false;
 	}
 
+	private void makeKeyMap()
+	{
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		for(int i = 0; i < alphabet.length(); i++)
+			keyMap.put(alphabet.charAt(i)+"", alphabet.charAt(i)+"");
+	}
+	
 }
 
