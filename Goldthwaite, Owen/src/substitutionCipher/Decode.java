@@ -11,6 +11,7 @@ public class Decode
 {
 	private String code;
 	private String saveCode;
+	private List<MapNode> freqs;
 	private Map<String, Double> map;
 	private Map<String, String> keyMap;
 	private int msgSize;
@@ -20,6 +21,7 @@ public class Decode
 		this.code = codeStuff;
 		this.saveCode = codeStuff;
 		this.msgSize = code.length();
+		freqs = new LinkedList<MapNode>();
 		this.keyMap = new HashMap<String, String>();
 		this.map = new HashMap<String, Double>();
 		makeKeyMap();
@@ -29,7 +31,6 @@ public class Decode
 	{
 		for(int i = 0; i < msg.length(); i++)
 		{
-			if(isLetter(msg.charAt(i))) //Is letter?
 			{
 				String letter = msg.charAt(i)+"";
 				if(map.containsKey(letter))
@@ -45,7 +46,6 @@ public class Decode
 	{	
 		createMap(code);
 		Map<String, Double> dMap = new HashMap<String, Double>();
-		List<MapNode> freqs = new LinkedList<MapNode>();
 		Set temp =  map.keySet();
 		Iterator itr = temp.iterator();
 
@@ -65,9 +65,16 @@ public class Decode
 		Scanner scan = new Scanner(System.in);
 		boolean again = true;
 
+		System.out.println("Do you want to change everything to most frequent letters?");
+		if(yesNo());
+		{
+			loadMostFreq();
+			code = swapAll();
+			System.out.println(code);
+		}
+
 		while(again)
 		{
-
 			System.out.println("Enter letter you want to change followed by the letter you want to swap it with!");
 
 			code = swapLetter(scan.nextLine().charAt(0)+"" , scan.nextLine().toUpperCase().charAt(0)+""); //Change all these things to chars in the swapLetter method
@@ -96,18 +103,49 @@ public class Decode
 
 			newCode += codeArray[i];
 		}
-		
+
 		System.out.println(keyMap);
 		return newCode;
 	}
-	
+
 	public void loadMostFreq()
 	{
 		String mostFreqLets = "EARIOTNSLCUDPMHGBFYWKVXZJC";
-		
-		
-		
-		
+		int count = 0;
+
+		for(int i = 0; i < freqs.size(); i++)
+		{
+			if(Character.isLetter(freqs.get(i).letter.charAt(0)))
+			{
+				keyMap.put(freqs.get(i).letter, mostFreqLets.charAt(count)+"".toLowerCase());
+				count++;
+				//System.out.println(keyMap);
+			}
+		}
+
+	}
+
+	public String swapAll()
+	{
+		char[] codeArray = new char[code.length()];
+		String newCode = "";
+
+		for(int k = 0; k < code.length(); k++)
+			codeArray[k] = code.charAt(k);
+
+		for(int i = 0; i < code.length(); i++)
+		{
+			if(keyMap.containsKey(code.charAt(i)+""))
+			{
+				codeArray[i] = keyMap.get(code.charAt(i)+"").charAt(0);
+	
+			}
+			newCode += codeArray[i];
+		}
+										//MAke sure set method thing works!!
+		System.out.println(keyMap);
+		System.out.println(newCode);
+		return newCode;
 	}
 
 	private void saveToFile() throws FileNotFoundException 
@@ -116,11 +154,11 @@ public class Decode
 		PrintWriter out = new PrintWriter(saveFile);
 		String toPrint = "";
 		int count = 0;
-		
+
 		for(int i = 0; i < code.length(); i++)
 		{
 			toPrint += code.charAt(i);
-			
+
 			if(toPrint.length() >= 60)
 			{
 				out.println(toPrint);
@@ -131,9 +169,9 @@ public class Decode
 
 		out.print(toPrint);
 		out.flush();
-		
+
 	}
-	
+
 	private boolean yesNo()
 	{
 		Scanner scan = new Scanner(System.in);
@@ -153,6 +191,6 @@ public class Decode
 		for(int i = 0; i < alphabet.length(); i++)
 			keyMap.put(alphabet.charAt(i)+"", alphabet.charAt(i)+"");
 	}
-	
+
 }
 
