@@ -81,9 +81,9 @@ public class Decode
 
 			System.out.println(code);
 			saveToFile();
-			again = yesNo();
+			//again = yesNo();
 		}
-		scan.close();
+		scan.close();    //UPDATE KEY MAP PROPERLY!!!
 		return code;
 	}
 
@@ -110,7 +110,7 @@ public class Decode
 
 	public void loadMostFreq()
 	{
-		String mostFreqLets = "EARIOTNSLCUDPMHGBFYWKVXZJC";
+		String mostFreqLets = "etaoinsrhldcumfpgwybvkxjqz";
 		int count = 0;
 
 		for(int i = 0; i < freqs.size(); i++)
@@ -119,7 +119,6 @@ public class Decode
 			{
 				keyMap.put(freqs.get(i).letter, mostFreqLets.charAt(count)+"".toLowerCase());
 				count++;
-				//System.out.println(keyMap);
 			}
 		}
 
