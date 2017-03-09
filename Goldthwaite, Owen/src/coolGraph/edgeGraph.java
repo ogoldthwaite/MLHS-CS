@@ -1,16 +1,21 @@
 package coolGraph;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-public class myGraph 
+public class edgeGraph 
 {
 	private ArrayList<Vertex> vertList;
+	private ArrayList<Edge> edgeList;
 	private Set<Integer> valSet;
 
-	public myGraph()
+	public edgeGraph()
 	{
 		this.vertList = new ArrayList<Vertex>();
-		valSet = new HashSet<Integer>();
+		this.edgeList = new ArrayList<Edge>();
+		this.valSet = new HashSet<Integer>();
 	}
 
 	public Vertex createVertex(int value)
@@ -53,13 +58,16 @@ public class myGraph
 			return false;
 	}
 
-	public void addEdge(Vertex x, Vertex y)
+	public void addEdge(Vertex x, Vertex y, int weight)
 	{
 		if(!(x.neighbors.contains(y)))
 			x.neighbors.add(y);
 
 		if(!(y.neighbors.contains(x)))
 			y.neighbors.add(x);
+		
+		Edge temp = new Edge(x, y, weight);
+		edgeList.add(temp);	
 	}
 
 	public boolean removeEdge(Vertex x, Vertex y)
@@ -67,6 +75,7 @@ public class myGraph
 		x.neighbors.remove(y);
 		y.neighbors.remove(x);
 
+		edgeList.remove(getEdge(x, y));
 		return true;
 	}
 
@@ -80,6 +89,16 @@ public class myGraph
 		x.value = value;
 	}
 	
+	public int getEdgeValue(Vertex a, Vertex b)
+	{
+		return getEdge(a,b).weight;
+	}
+	
+	public void setEdgeValue(Vertex a, Vertex b, int value)
+	{
+		getEdge(a,b).weight = value;
+	}
+	
 	public Vertex getVertex(int value)
 	{
 		Vertex temp = null;
@@ -89,6 +108,20 @@ public class myGraph
 				temp = vertList.get(i);
 		
 		return temp;
+	}
+	
+	public Edge getEdge(Vertex a, Vertex b)
+	{
+		Edge temp = null;
+		
+		for(int i = 0; i < edgeList.size(); i++)
+		{
+			if( (edgeList.get(i).conA.equals(a)) && (edgeList.get(i).conB.equals(b)) )
+				temp = edgeList.get(i);
+		}
+		
+		return temp;
+		
 	}
 
 	public String toString()
@@ -106,8 +139,5 @@ public class myGraph
 		}
 		return "";
 	}
-
-
-
-
+	
 }
