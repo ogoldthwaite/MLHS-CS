@@ -9,7 +9,7 @@ public class edgeGraph
 {
 	private ArrayList<Vertex> vertList;
 	private ArrayList<Edge> edgeList;
-	private Set<Integer> valSet;
+	private Set<Integer> valSet; 
 
 	public edgeGraph()
 	{
@@ -63,14 +63,14 @@ public class edgeGraph
 		if(!(x.neighbors.contains(y)))
 			x.neighbors.add(y);
 
-//		if(!(y.neighbors.contains(x)))  //Comment out for directional
+//		if(!(y.neighbors.contains(x)))  //COMMENT OUT FOR DIRECTIONAL!!!
 //			y.neighbors.add(x);
 
 		Edge temp = new Edge(x, y, weight);
 		edgeList.add(temp);	
 	}
 
-	public boolean removeEdge(Vertex x, Vertex y) //Removes if directional no matter which way vertices are put in
+	public boolean removeEdge(Vertex x, Vertex y) //Removes if directional no matter which way vertices are put in, change?
 	{
 		x.neighbors.remove(y);    
 		y.neighbors.remove(x);
@@ -79,7 +79,7 @@ public class edgeGraph
 		return true;
 	}
 
-	public int getVertexValue(Vertex x) //Maybe change so only returns if vertex is in graph
+	public int getVertexValue(Vertex x) //Maybe change so only returns if vertex is in graph, but maybe no ;)
 	{		
 		return x.value;
 	}
