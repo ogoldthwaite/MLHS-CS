@@ -1,4 +1,4 @@
-package coolGraph;
+package myEdgeGraph;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,11 +24,11 @@ public class edgeGraph
 		return newVert;
 	}
 
-	public void addVertex(Vertex toAdd) //may need to check if the vertex is already there or not
+	public void addVertex(Vertex toAdd) 
 	{
-		if(!(valSet.contains(toAdd.value)))
+		if(!(valSet.contains(toAdd.value))) //makes sure each vertex is different
 		{
-			System.out.println("Added" + toAdd.value);
+			System.out.println("Added " + toAdd.value);
 			this.vertList.add(toAdd);
 			valSet.add(toAdd.value);
 		}
@@ -63,24 +63,24 @@ public class edgeGraph
 		if(!(x.neighbors.contains(y)))
 			x.neighbors.add(y);
 
-		if(!(y.neighbors.contains(x)))
-			y.neighbors.add(x);
-		
+//		if(!(y.neighbors.contains(x)))  //Comment out for directional
+//			y.neighbors.add(x);
+
 		Edge temp = new Edge(x, y, weight);
 		edgeList.add(temp);	
 	}
 
-	public boolean removeEdge(Vertex x, Vertex y)
+	public boolean removeEdge(Vertex x, Vertex y) //Removes if directional no matter which way vertices are put in
 	{
-		x.neighbors.remove(y);
+		x.neighbors.remove(y);    
 		y.neighbors.remove(x);
 
 		edgeList.remove(getEdge(x, y));
 		return true;
 	}
 
-	public int getVertexValue(Vertex x)
-	{
+	public int getVertexValue(Vertex x) //Maybe change so only returns if vertex is in graph
+	{		
 		return x.value;
 	}
 
@@ -88,40 +88,39 @@ public class edgeGraph
 	{
 		x.value = value;
 	}
-	
+
 	public int getEdgeValue(Vertex a, Vertex b)
 	{
 		return getEdge(a,b).weight;
 	}
-	
+
 	public void setEdgeValue(Vertex a, Vertex b, int value)
 	{
 		getEdge(a,b).weight = value;
 	}
-	
+
 	public Vertex getVertex(int value)
 	{
 		Vertex temp = null;
-		
+
 		for(int i = 0; i < vertList.size(); i++)
 			if(vertList.get(i).value == value)
 				temp = vertList.get(i);
-		
+
 		return temp;
 	}
-	
+
 	public Edge getEdge(Vertex a, Vertex b)
 	{
 		Edge temp = null;
-		
+
 		for(int i = 0; i < edgeList.size(); i++)
 		{
 			if( (edgeList.get(i).conA.equals(a)) && (edgeList.get(i).conB.equals(b)) )
 				temp = edgeList.get(i);
 		}
-		
+
 		return temp;
-		
 	}
 
 	public String toString()
@@ -130,14 +129,14 @@ public class edgeGraph
 		for(int i = 0; i < vertList.size(); i++)
 		{
 			System.out.print(vertList.get(i).value + ":");
-			
+
 			for(int j = 0; j < vertList.get(i).neighbors.size(); j++)
 			{
-				 System.out.print(vertList.get(i).neighbors.get(j).value +" ");
+				System.out.print(vertList.get(i).neighbors.get(j).value +" ");
 			}
 			System.out.println();
 		}
 		return "";
 	}
-	
+
 }
