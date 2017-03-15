@@ -10,12 +10,14 @@ public class edgeGraph
 	private ArrayList<Vertex> vertList;
 	private ArrayList<Edge> edgeList;
 	private Set<Integer> valSet; 
+	private Set<Vertex> unvisited;
 
 	public edgeGraph()
 	{
 		this.vertList = new ArrayList<Vertex>();
 		this.edgeList = new ArrayList<Edge>();
 		this.valSet = new HashSet<Integer>();
+		this.unvisited = new HashSet<Vertex>();
 	}
 
 	public Vertex createVertex(int value)
@@ -123,6 +125,24 @@ public class edgeGraph
 		return temp;
 	}
 
+	public void getShortestPath(Vertex initial)
+	{
+		initial.distance = 0;
+		unvisited.addAll(vertList);
+		unvisited.remove(initial);    //May possibly change depending on if first vertex starts as visited or not
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	public String toString()
 	{
 
