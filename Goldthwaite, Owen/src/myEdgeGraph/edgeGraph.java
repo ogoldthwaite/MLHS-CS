@@ -2,6 +2,7 @@ package myEdgeGraph;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -127,21 +128,37 @@ public class edgeGraph
 
 	public void getShortestPath(Vertex initial)
 	{
-		initial.distance = 0;
+		if(initial.distance == Integer.MAX_VALUE)
+			initial.distance = 0;
+		
 		unvisited.addAll(vertList);
-		unvisited.remove(initial);    //May possibly change depending on if first vertex starts as visited or not
+		//unvisited.remove(initial); //May possibly change depending on if first vertex starts as visited or not
 		
+		for(int i = 0; i < initial.neighbors.size(); i++)
+		{
+		Vertex temp = initial.neighbors.get(i);
 		
+		if(temp.distance == Integer.MAX_VALUE)
+			initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+		else
+			if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) )
+				initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+			
+			if(temp.neighbors.size() == 0)
+			unvisited.remove(initial.neighbors.get(i));
+		}
 		
+		unvisited.remove(initial);
 		
+		if(unvisited.size() != 0)
+		{
+		//Iterator<Vertex> itr = unvisited.iterator();
+		if(initial.neighbors.size() >= 1)
+			getShortestPath(initial.neighbors.get(0));
+		}
 		
-		
+		return;
 	}
-	
-	
-	
-	
-	
 	
 	public String toString()
 	{
