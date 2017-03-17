@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Set;
 
 public class edgeGraph 
@@ -11,14 +12,14 @@ public class edgeGraph
 	private ArrayList<Vertex> vertList;
 	private ArrayList<Edge> edgeList;
 	private Set<Integer> valSet; 
-	private Set<Vertex> unvisited;
+	private PriorityQueue<Vertex> unvisited;
 
 	public edgeGraph()
 	{
 		this.vertList = new ArrayList<Vertex>();
 		this.edgeList = new ArrayList<Edge>();
 		this.valSet = new HashSet<Integer>();
-		this.unvisited = new HashSet<Vertex>();
+		this.unvisited = new PriorityQueue<Vertex>();
 	}
 
 	public Vertex createVertex(int value)
@@ -126,12 +127,19 @@ public class edgeGraph
 		return temp;
 	}
 
-	public void getShortestPath(Vertex initial)
+	public void setDistances(Vertex initial)
+	{
+		unvisited.addAll(vertList);
+		setDistancesPriv(initial);
+	}
+
+	private void setDistancesPriv(Vertex initial)
 	{
 		if(initial.distance == Integer.MAX_VALUE)
 			initial.distance = 0;
 		
-		unvisited.addAll(vertList);
+		System.out.println(initial.distance);
+			
 		//unvisited.remove(initial); //May possibly change depending on if first vertex starts as visited or not
 		
 		for(int i = 0; i < initial.neighbors.size(); i++)
@@ -139,10 +147,18 @@ public class edgeGraph
 		Vertex temp = initial.neighbors.get(i);
 		
 		if(temp.distance == Integer.MAX_VALUE)
+		{
 			initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+			initial.neighbors.get(i).shortestPath.add(initial);
+			initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
+		}
 		else
 			if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) )
+			{	
 				initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+				initial.neighbors.get(i).shortestPath = initial.shortestPath;
+				initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
+			}
 			
 			if(temp.neighbors.size() == 0)
 			unvisited.remove(initial.neighbors.get(i));
@@ -152,9 +168,7 @@ public class edgeGraph
 		
 		if(unvisited.size() != 0)
 		{
-		//Iterator<Vertex> itr = unvisited.iterator();
-		if(initial.neighbors.size() >= 1)
-			getShortestPath(initial.neighbors.get(0));
+			setDistancesPriv(unvisited.poll());
 		}
 		
 		return;

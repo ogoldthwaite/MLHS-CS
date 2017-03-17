@@ -1,5 +1,7 @@
 package myEdgeGraph;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 public class GraphTester {
 
 	public static void main(String[] args) 
@@ -19,16 +21,19 @@ public class GraphTester {
 		eGraph.addVertex(e);
 		
 		eGraph.addEdge(a, b, 1);
-		eGraph.addEdge(a, c, 2);
-		eGraph.addEdge(b, c, 1);
+		eGraph.addEdge(a, c, 3);
+		//eGraph.addEdge(b, c, 1);
 		eGraph.addEdge(c, d, 3);
 		eGraph.addEdge(b, e, 5);
 		eGraph.addEdge(d, e, 4);
 		
-		System.out.println(b.distance);
+		//System.out.println(b.distance);
 		
-		eGraph.getShortestPath(a);
+		eGraph.setDistances(a);
 		
+		System.out.println(c.shortestPath.get(0).value + c.shortestPath.get(1).value);
+		
+		System.out.println();
 		System.out.println(b.distance);
 		System.out.println(c.distance);
 		System.out.println(e.distance);
