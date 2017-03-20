@@ -22,7 +22,7 @@ public class GraphTester {
 		
 		eGraph.addEdge(a, b, 1);
 		eGraph.addEdge(a, c, 3);
-		//eGraph.addEdge(b, c, 1);
+		eGraph.addEdge(b, c, 1);
 		eGraph.addEdge(c, d, 3);
 		eGraph.addEdge(b, e, 5);
 		eGraph.addEdge(d, e, 4);
@@ -31,13 +31,17 @@ public class GraphTester {
 		
 		eGraph.setDistances(a);
 		
-		System.out.println(c.shortestPath.get(0).value + c.shortestPath.get(1).value);
+		System.out.println();
+		
+		for(int i = 0; i < d.shortestPath.size(); i++)
+			System.out.println(d.shortestPath.get(i).value + " z");
 		
 		System.out.println();
+		System.out.println(a.distance);
 		System.out.println(b.distance);
 		System.out.println(c.distance);
-		System.out.println(e.distance);
 		System.out.println(d.distance);
+		System.out.println(e.distance);
 
 //		System.out.println(eGraph.getVertexValue(a));
 //

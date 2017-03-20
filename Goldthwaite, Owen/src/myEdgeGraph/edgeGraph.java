@@ -136,44 +136,48 @@ public class edgeGraph
 	private void setDistancesPriv(Vertex initial)
 	{
 		if(initial.distance == Integer.MAX_VALUE)
+		{
+			initial.shortestPath.add(initial);
 			initial.distance = 0;
-		
-		System.out.println(initial.distance);
-			
-		//unvisited.remove(initial); //May possibly change depending on if first vertex starts as visited or not
-		
+		}
+
+		System.out.println(initial.value);
+
 		for(int i = 0; i < initial.neighbors.size(); i++)
 		{
-		Vertex temp = initial.neighbors.get(i);
-		
-		if(temp.distance == Integer.MAX_VALUE)
-		{
-			initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
-			initial.neighbors.get(i).shortestPath.add(initial);
-			initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
-		}
-		else
-			if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) )
-			{	
+			Vertex temp = initial.neighbors.get(i);
+
+			if(temp.distance == Integer.MAX_VALUE)
+			{
 				initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
-				initial.neighbors.get(i).shortestPath = initial.shortestPath;
+				
+				initial.neighbors.get(i).shortestPath = initial.shortestPath;  //add an isAdjacent test somewhere?
 				initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
 			}
-			
+			else
+				if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) )
+				{	
+					initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+					
+					initial.neighbors.get(i).shortestPath = initial.shortestPath;
+					initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
+				}
+
 			if(temp.neighbors.size() == 0)
-			unvisited.remove(initial.neighbors.get(i));
+				unvisited.remove(initial.neighbors.get(i));
+			
 		}
-		
+
 		unvisited.remove(initial);
-		
+
 		if(unvisited.size() != 0)
 		{
 			setDistancesPriv(unvisited.poll());
 		}
-		
+
 		return;
 	}
-	
+
 	public String toString()
 	{
 
