@@ -52,7 +52,7 @@ public class edgeGraph
 		return neighbors;
 	}
 
-	public boolean isAdjacent(Vertex x, Vertex y) //Only currently works for bidirectional graph
+	public boolean isAdjacent(Vertex x, Vertex y) 
 	{
 		List<Vertex> neighbors = x.neighbors;
 
@@ -67,8 +67,8 @@ public class edgeGraph
 		if(!(x.neighbors.contains(y)))
 			x.neighbors.add(y);
 
-//		if(!(y.neighbors.contains(x)))  //COMMENT OUT FOR DIRECTIONAL!!!
-//			y.neighbors.add(x);
+		//		if(!(y.neighbors.contains(x)))  //COMMENT OUT FOR DIRECTIONAL!!!
+		//			y.neighbors.add(x);
 
 		Edge temp = new Edge(x, y, weight);
 		edgeList.add(temp);	
@@ -142,37 +142,43 @@ public class edgeGraph
 		}
 
 		System.out.println(initial.value);
+		int count = 0;
 
-		for(int i = 0; i < initial.neighbors.size(); i++)
+		while(count <= vertList.size())
 		{
-			Vertex temp = initial.neighbors.get(i);
 
-			if(temp.distance == Integer.MAX_VALUE)
+			
+			for(int i = 0; i < initial.neighbors.size(); i++)
 			{
-				initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+
+				Vertex temp = initial.neighbors.get(i);
 				
-				initial.neighbors.get(i).shortestPath = initial.shortestPath;  //add an isAdjacent test somewhere?
-				initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
-			}
-			else
-				if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) )
-				{	
+				if(temp.distance == Integer.MAX_VALUE && isAdjacent(initial, initial.neighbors.get(i)))
+				{
 					initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
-					
-					initial.neighbors.get(i).shortestPath = initial.shortestPath;
+
+					initial.neighbors.get(i).shortestPath = initial.shortestPath;  //add an isAdjacent test somewhere?
 					initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
 				}
+				else
+					if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) && isAdjacent(initial, initial.neighbors.get(i) ))
+					{	
+						initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
 
-			if(temp.neighbors.size() == 0)
-				unvisited.remove(initial.neighbors.get(i));
-			
-		}
+						initial.neighbors.get(i).shortestPath = initial.shortestPath;
+						initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
+					}
 
-		unvisited.remove(initial);
+				if(temp.neighbors.size() == 0)
+					unvisited.remove(initial.neighbors.get(i));
 
-		if(unvisited.size() != 0)
-		{
-			setDistancesPriv(unvisited.poll());
+			}
+
+			if(unvisited.size() != 0 && isAdjacent(initial, unvisited.peek()))
+			{
+				initial = unvisited.poll();
+			}
+			count++;
 		}
 
 		return;

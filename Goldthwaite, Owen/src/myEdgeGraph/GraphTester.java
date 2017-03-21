@@ -27,6 +27,7 @@ public class GraphTester {
 		eGraph.addEdge(b, e, 5);
 		eGraph.addEdge(d, e, 4);
 		
+		System.out.println(eGraph.isAdjacent(c, b));
 		//System.out.println(b.distance);
 		
 		eGraph.setDistances(a);
