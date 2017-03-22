@@ -128,59 +128,47 @@ public class edgeGraph
 	}
 
 	public void setDistances(Vertex initial)
-	{
+	{		
+		for(Vertex vert : vertList)
+		{
+			vert.distance = Integer.MAX_VALUE;
+		}
+		initial.distance = 0;
+		initial.shortestPath.add(initial);
+		
 		unvisited.addAll(vertList);
-		setDistancesPriv(initial);
+		
+		Vertex closest = new Vertex(-1);
+		setDistancesPriv(initial, closest);
 	}
 
-	private void setDistancesPriv(Vertex initial)
+	private void setDistancesPriv(Vertex initial, Vertex closest)
 	{
-		if(initial.distance == Integer.MAX_VALUE)
-		{
-			initial.shortestPath.add(initial);
-			initial.distance = 0;
-		}
 
-		System.out.println(initial.value);
-		int count = 0;
-
-		while(count <= vertList.size())
-		{
-
-			
 			for(int i = 0; i < initial.neighbors.size(); i++)
 			{
-
 				Vertex temp = initial.neighbors.get(i);
 				
-				if(temp.distance == Integer.MAX_VALUE && isAdjacent(initial, initial.neighbors.get(i)))
-				{
-					initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
-
-					initial.neighbors.get(i).shortestPath = initial.shortestPath;  //add an isAdjacent test somewhere?
-					initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
-				}
-				else
-					if(temp.distance > (initial.distance + getEdgeValue(initial, temp)) && isAdjacent(initial, initial.neighbors.get(i) ))
+					if(temp.distance > (initial.distance + getEdgeValue(initial, temp)))
 					{	
 						initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
 
 						initial.neighbors.get(i).shortestPath = initial.shortestPath;
-						initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); //change this stuff
+						initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); 
 					}
-
-				if(temp.neighbors.size() == 0)
-					unvisited.remove(initial.neighbors.get(i));
-
-			}
-
-			if(unvisited.size() != 0 && isAdjacent(initial, unvisited.peek()))
+					
+//					if(closest.distance > temp.distance)
+//						closest = initial.neighbors.get(i);
+			 
+					
+			if(unvisited.contains(initial))
 			{
-				initial = unvisited.poll();
+				//initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); 
+				unvisited.remove(initial);
+				setDistancesPriv(initial.neighbors.get(i), closest);
 			}
-			count++;
-		}
 
+		}
 		return;
 	}
 

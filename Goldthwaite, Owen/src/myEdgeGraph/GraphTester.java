@@ -34,8 +34,8 @@ public class GraphTester {
 		
 		System.out.println();
 		
-		for(int i = 0; i < d.shortestPath.size(); i++)
-			System.out.println(d.shortestPath.get(i).value + " z");
+		for(int i = 0; i < c.shortestPath.size(); i++)
+			System.out.println(c.shortestPath.get(i).value + " z");
 		
 		System.out.println();
 		System.out.println(a.distance);
