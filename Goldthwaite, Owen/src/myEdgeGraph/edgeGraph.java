@@ -135,9 +135,9 @@ public class edgeGraph
 		}
 		initial.distance = 0;
 		initial.shortestPath.add(initial);
-		
+
 		unvisited.addAll(vertList);
-		
+
 		Vertex closest = new Vertex(-1);
 		setDistancesPriv(initial, closest);
 	}
@@ -145,27 +145,27 @@ public class edgeGraph
 	private void setDistancesPriv(Vertex initial, Vertex closest)
 	{
 
-			for(int i = 0; i < initial.neighbors.size(); i++)
-			{
-				Vertex temp = initial.neighbors.get(i);
-				
-					if(temp.distance > (initial.distance + getEdgeValue(initial, temp)))
-					{	
-						initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+		for(int i = 0; i < initial.neighbors.size(); i++)
+		{
+			Vertex temp = initial.neighbors.get(i);
 
-						initial.neighbors.get(i).shortestPath = initial.shortestPath;
-						initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); 
-					}
-					
-//					if(closest.distance > temp.distance)
-//						closest = initial.neighbors.get(i);
-			 
-					
-			if(unvisited.contains(initial))
+			if(temp.distance > (initial.distance + getEdgeValue(initial, temp)))
+			{	
+				initial.neighbors.get(i).distance = initial.distance + getEdgeValue(initial, temp);
+
+				initial.neighbors.get(i).shortestPath.clear();
+				initial.neighbors.get(i).shortestPath.addAll(initial.shortestPath);
+				initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); 
+
+			}
+
+			//for(Vertex v : initial.neighbors)
 			{
-				//initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); 
-				unvisited.remove(initial);
-				setDistancesPriv(initial.neighbors.get(i), closest);
+				if(unvisited.contains(initial))
+				{
+					unvisited.remove(initial);
+					setDistancesPriv(initial.neighbors.get(i), closest);
+				}
 			}
 
 		}
