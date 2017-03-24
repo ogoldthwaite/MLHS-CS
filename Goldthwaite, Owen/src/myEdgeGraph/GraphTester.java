@@ -25,15 +25,9 @@ public class GraphTester {
 		eGraph.addEdge(b, e, 5);
 		eGraph.addEdge(d, e, 4);
 		
-		System.out.println(eGraph.isAdjacent(c, b));
-		//System.out.println(b.distance);
-		
 		eGraph.setDistances(a);
 		
-		System.out.println();
-		
-		for(int i = 0; i < c.shortestPath.size(); i++)
-			System.out.println(c.shortestPath.get(i).value + " z");
+		System.out.println(eGraph.getShortestPath(c));
 		
 		System.out.println();
 		System.out.println(a.distance);

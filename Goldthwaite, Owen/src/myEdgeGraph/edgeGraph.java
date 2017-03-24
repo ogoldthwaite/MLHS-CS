@@ -1,11 +1,6 @@
 package myEdgeGraph;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 
 public class edgeGraph 
 {
@@ -32,7 +27,6 @@ public class edgeGraph
 	{
 		if(!(valSet.contains(toAdd.value))) //makes sure each vertex is different
 		{
-			System.out.println("Added " + toAdd.value);
 			this.vertList.add(toAdd);
 			valSet.add(toAdd.value);
 		}
@@ -155,21 +149,34 @@ public class edgeGraph
 
 				initial.neighbors.get(i).shortestPath.clear();
 				initial.neighbors.get(i).shortestPath.addAll(initial.shortestPath);
+
 				initial.neighbors.get(i).shortestPath.add(initial.neighbors.get(i)); 
 
 			}
 
-			//for(Vertex v : initial.neighbors)
+			if(unvisited.contains(initial))
 			{
-				if(unvisited.contains(initial))
-				{
-					unvisited.remove(initial);
-					setDistancesPriv(initial.neighbors.get(i), closest);
-				}
+				unvisited.remove(initial);
+				setDistancesPriv(initial.neighbors.get(i), closest);
 			}
-
 		}
-		return;
+
+	}
+
+	public List<Integer> getShortestPath(Vertex v)
+	{
+		List<Integer> toReturn = new LinkedList<Integer>();
+
+		for(Vertex a : v.shortestPath)
+			toReturn.add(a.value);
+
+		return toReturn;
+	}
+
+	public void printDistances()
+	{
+		for(Vertex v : vertList)
+			System.out.println(v.distance);
 	}
 
 	public String toString()
